@@ -73,37 +73,37 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
         }
 
         return (
-          <li key={u.id} className={`vault relative overflow-hidden rounded-2xl p-4 ${isNext ? "ring-4 ring-pink-300" : "opacity-95"}`}>
+          <li key={u.id} className={`vault relative overflow-hidden rounded-2xl p-4 ${isNext ? "ring-4 ring-pink-600/70" : "opacity-95"}`}>
             {isNext && (
-              <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest">NEXT</span>
+              <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT</span>
             )}
             <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10 text-lavender ring-1 ring-white/15">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-lavender-700 ring-1 ring-white">
                 <LockIcon open={false} className="h-7 w-7" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-black tracking-widest text-lavender">{label}・{n(u.target_qty)}個で解放</p>
-                <p className="mt-0.5 font-black leading-snug text-white">{u.title}</p>
-                {u.description && <p className="mt-1 whitespace-pre-wrap text-xs text-white/70">{u.description}</p>}
+                <p className="text-[11px] font-black tracking-widest text-lavender-700">{label}・{n(u.target_qty)}個で解放</p>
+                <p className="mt-0.5 font-black leading-snug">{u.title}</p>
+                {u.description && <p className="mt-1 whitespace-pre-wrap text-xs text-ink-soft">{u.description}</p>}
               </div>
               {u.image && (
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-1 ring-white/15">
-                  <img src={u.image} alt="" className="h-full w-full scale-110 object-cover blur-md brightness-50" />
-                  <span className="absolute inset-0 flex items-center justify-center text-lavender"><LockIcon open={false} className="h-6 w-6" /></span>
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-2 ring-white">
+                  <img src={u.image} alt="" className="h-full w-full scale-110 object-cover blur-md" />
+                  <span className="absolute inset-0 flex items-center justify-center bg-lavender/60 text-lavender-700"><LockIcon open={false} className="h-6 w-6" /></span>
                 </div>
               )}
             </div>
             {!final ? (
               <div className="mt-3">
-                <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/15">
-                  <div className="h-full rounded-full bg-gradient-to-r from-lavender to-pink" style={{ width: `${segPct}%` }} />
+                <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/60">
+                  <div className="h-full rounded-full bg-gradient-to-r from-lavender-500 to-pink-600" style={{ width: `${segPct}%` }} />
                 </div>
-                <p className="mt-1.5 text-right text-xs text-white/80">
-                  UNLOCKまで <b className={`tabular-nums text-white ${isNext ? "text-base" : ""}`}>あと{n(u.target_qty - total)}個</b>
+                <p className="mt-1.5 text-right text-xs text-ink-soft">
+                  UNLOCKまで <b className={`tabular-nums ${isNext ? "text-base text-pink-700" : "text-ink"}`}>あと{n(u.target_qty - total)}個</b>
                 </p>
               </div>
             ) : (
-              <p className="mt-2 text-right text-xs text-white/70">未達成のまま募集終了</p>
+              <p className="mt-2 text-right text-xs text-ink-soft">未達成のまま募集終了</p>
             )}
           </li>
         );

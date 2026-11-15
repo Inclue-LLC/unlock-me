@@ -101,16 +101,16 @@ export default async function ProjectPage({ params }: Props) {
                 <div className="vault relative overflow-hidden rounded-2xl p-4">
                   <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT UNLOCK</span>
                   <div className="flex items-center gap-3">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10 text-lavender ring-1 ring-white/15">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-lavender-700 ring-1 ring-white">
                       <LockIcon open={false} className="h-7 w-7" />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-[11px] font-black tracking-widest text-lavender">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}</p>
-                      <p className="truncate font-bold text-white">{prog.next.title}</p>
+                      <p className="text-[11px] font-black tracking-widest text-lavender-700">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}</p>
+                      <p className="truncate font-bold">{prog.next.title}</p>
                     </div>
                   </div>
-                  <p className="mt-3 text-right text-sm text-white/80">
-                    解放まで <b className="text-3xl font-black tabular-nums text-pink">あと{num(prog.remaining)}</b><span className="text-white">個</span>
+                  <p className="mt-3 text-right text-sm text-ink-soft">
+                    解放まで <b className="text-3xl font-black tabular-nums text-pink-700">あと{num(prog.remaining)}</b><span className="text-ink">個</span>
                   </p>
                 </div>
               ) : unlocks.length > 0 ? (
@@ -177,7 +177,7 @@ export default async function ProjectPage({ params }: Props) {
         </section>
         <section>
           <h2 className="section-title">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-pink"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-lavender text-lavender-700"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
             UNLOCK条件<span className="text-sm font-bold text-pink-700">{prog.achievedCount}/{prog.count} 解放</span>
           </h2>
           {unlocks.length === 0 ? (

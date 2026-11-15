@@ -15,9 +15,9 @@
   --color-pink-600: #C9407A; /* 操作色（白文字コントラスト 4.67） */
   --color-pink-700: #A82E62;
   --color-cream: #FFF4F1;
-  --color-ink: #2B2340;      /* LOCKED（金庫）色 */
-  --color-ink-2: #3A2F57;
-  --color-ink-soft: #5A5170;
+  --color-ink: #463A66;      /* 文字・ボタン（黒ではなく深いプラム） */
+  --color-ink-2: #574A7D;
+  --color-ink-soft: #5E5578;
   --color-line: #E6DCF0;
   --font-sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
   --radius-card: 1.25rem;
@@ -59,11 +59,13 @@
 @utility notice-info { @apply notice border-lavender-300 bg-lavender-50 text-lavender-700; }
 @utility notice-ok { @apply notice border-[#BFE5CF] bg-[#F0FAF4] text-[#2F7A51]; }
 @utility notice-error { @apply notice border-pink-300 bg-pink-50 text-pink-700; }
-/* LOCKED：金庫の扉のような濃色＋斜めストライプ */
+/* LOCKED：ラベンダーの扉＋斜めストライプ */
 @utility vault {
-  background-color: var(--color-ink);
-  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 10px, transparent 10px 20px);
-  color: #fff;
+  background-color: #D3C3F2;
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.32) 0 10px, transparent 10px 20px),
+    linear-gradient(135deg, #DCCEF5 0%, #C9B6EE 100%);
+  color: var(--color-ink);
 }
 /* UNLOCKED：明るく光る */
 @utility unlocked-glow {
