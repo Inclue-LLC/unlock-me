@@ -31,7 +31,7 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
 
   return (
     <div className="container-app max-w-2xl py-8">
-      <Link href={`/projects/${slug}`} className="text-xs text-lavender-700">← 商品ページに戻る</Link>
+      <Link href={`/projects/${slug}`} className="text-xs text-ink-soft">← 商品ページに戻る</Link>
       <h1 className="mt-2 text-xl font-black">購入申込</h1>
       <p className="mt-1 text-sm text-ink-soft">{p.title}</p>
       <div className="mt-4"><Flash ok={sp.ok} error={sp.error} /></div>
@@ -89,7 +89,7 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
                       <span>{m.brand} •••• {m.last4}{m.exp_month ? `（有効期限 ${m.exp_month}/${String(m.exp_year).slice(-2)}）` : ""}</span>
                     </label>
                   ))}
-                  <Link href={`/mypage/payment-methods?next=${encodeURIComponent(here)}`} className="inline-block text-xs text-lavender-700 underline">別のお支払い方法を追加</Link>
+                  <Link href={`/mypage/payment-methods?next=${encodeURIComponent(here)}`} className="inline-block text-xs text-ink-soft underline">別のお支払い方法を追加</Link>
                 </div>
               )}
             </section>

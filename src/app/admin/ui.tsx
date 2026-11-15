@@ -11,7 +11,7 @@ export function PageTitle({ children, action }: { children: React.ReactNode; act
 }
 
 const PCOLOR: Record<ProjectStatus, string> = {
-  draft: "bg-white border border-line text-ink-soft", scheduled: "bg-lavender-100 text-lavender-700", open: "bg-violet text-white",
+  draft: "bg-white border border-line text-ink-soft", scheduled: "bg-[#F2F2F2] text-ink-soft", open: "bg-violet text-white",
   judging: "bg-pink-50 text-pink-700", succeeded: "bg-[#E3F5EA] text-[#2F7A51]", failed: "bg-pink-50 text-pink-700", suspended: "bg-pink-600 text-white",
 };
 export function ProjectStatusChip({ s }: { s: ProjectStatus }) {
@@ -19,7 +19,7 @@ export function ProjectStatusChip({ s }: { s: ProjectStatus }) {
 }
 
 const OCOLOR: Partial<Record<OrderStatus, string>> = {
-  applied: "bg-lavender-100 text-lavender-700", awaiting_payment: "bg-lavender-100 text-lavender-700", payment_failed: "bg-pink-600 text-white",
+  applied: "bg-[#F2F2F2] text-ink-soft", awaiting_payment: "bg-[#F2F2F2] text-ink-soft", payment_failed: "bg-pink-600 text-white",
   paid: "bg-[#E3F5EA] text-[#2F7A51]",
 };
 export function OrderStatusChip({ s }: { s: OrderStatus }) {

@@ -37,7 +37,7 @@ export function ShareButtons({ url, text, image }: { url: string; text: string; 
         </a>
       )}
       <button type="button" className={cls} onClick={copy}>
-        <span className={`${icon} bg-lavender-500`}>🔗</span>
+        <span className={`${icon} bg-[#9A9A9A]`}>🔗</span>
         {copied ? "コピーしました" : "URLコピー"}
       </button>
       <button type="button" className={cls} onClick={native}>

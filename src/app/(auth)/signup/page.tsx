@@ -26,7 +26,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
         </label>
         <SubmitButton className="btn-pink w-full">登録してメールを確認する</SubmitButton>
       </form>
-      <p className="mt-6 text-center text-xs">登録済みの方は <Link href={`/login?next=${encodeURIComponent(next)}`} className="font-bold text-lavender-700 underline">ログイン</Link></p>
+      <p className="mt-6 text-center text-xs">登録済みの方は <Link href={`/login?next=${encodeURIComponent(next)}`} className="font-bold text-ink-soft underline">ログイン</Link></p>
     </AuthCard>
   );
 }

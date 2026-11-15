@@ -28,7 +28,7 @@ export default async function PaymentMethodsPage({ searchParams }: { searchParam
                 <span>
                   💳 {m.brand} •••• {m.last4}
                   {m.exp_month && <span className="ml-2 text-xs text-ink-soft">有効期限 {m.exp_month}/{String(m.exp_year).slice(-2)}</span>}
-                  {m.is_default && <span className="chip ml-2 bg-lavender-100 text-lavender-700">既定</span>}
+                  {m.is_default && <span className="chip ml-2 bg-[#F2F2F2] text-ink-soft">既定</span>}
                 </span>
                 <span className="flex gap-2">
                   {!m.is_default && (

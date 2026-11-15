@@ -48,10 +48,10 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <Link href="/mypage" className="text-xs text-lavender-700">← 申込・注文一覧</Link>
+      <Link href="/mypage" className="text-xs text-ink-soft">← 申込・注文一覧</Link>
       {sp.applied && (
         <div className="card overflow-hidden">
-          <div className="bg-gradient-to-br from-lavender to-pink p-6 text-center">
+          <div className="bg-gradient-to-br from-[#EAEAEA] to-pink p-6 text-center">
             <LockIcon open className="mx-auto h-10 w-10 text-pink-700" />
             <p className="mt-2 text-lg font-black">申込が完了しました！</p>
             <p className="text-xs text-ink-soft">確認メールをお送りしました。シェアしてUNLOCKを近づけよう</p>
@@ -94,7 +94,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
             const open = o.final_qty !== null ? u.confirmed === true : u.achieved_at !== null;
             return (
               <li key={u.id} className="flex items-center gap-2">
-                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-600" : "text-lavender-300"}`} />
+                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-600" : "text-[#D6D6D6]"}`} />
                 <span className="text-xs text-ink-soft">{String(i + 1).padStart(2, "0")} / {num(u.target_qty)}個</span>
                 <span className={open ? "font-bold" : "text-ink-soft"}>{u.title}</span>
               </li>

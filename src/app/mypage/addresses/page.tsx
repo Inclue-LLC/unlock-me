@@ -21,7 +21,7 @@ export default async function AddressesPage({ searchParams }: { searchParams: Pr
           <ul className="space-y-2">
             {list.map((a) => (
               <li key={a.id} className="card space-y-2 p-4 text-sm">
-                <p>{formatAddress(a)}{a.is_default && <span className="chip ml-2 bg-lavender-100 text-lavender-700">既定</span>}</p>
+                <p>{formatAddress(a)}{a.is_default && <span className="chip ml-2 bg-[#F2F2F2] text-ink-soft">既定</span>}</p>
                 <p className="text-xs text-ink-soft">TEL {a.phone}</p>
                 <div className="flex gap-2">
                   {!a.is_default && <form action={defaultAddressAction}><input type="hidden" name="id" value={a.id} /><SubmitButton className="btn-outline btn-sm">既定にする</SubmitButton></form>}

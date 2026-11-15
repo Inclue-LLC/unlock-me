@@ -78,18 +78,18 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
               <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT</span>
             )}
             <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-lavender-700 ring-1 ring-white">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-ink-soft ring-1 ring-white">
                 <LockIcon open={false} className="h-7 w-7" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-black tracking-widest text-lavender-700">{label}・{n(u.target_qty)}個で解放</p>
+                <p className="text-[11px] font-black tracking-widest text-ink-soft">{label}・{n(u.target_qty)}個で解放</p>
                 <p className="mt-0.5 font-black leading-snug">{u.title}</p>
                 {u.description && <p className="mt-1 whitespace-pre-wrap text-xs text-ink-soft">{u.description}</p>}
               </div>
               {u.image && (
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-2 ring-white">
                   <img src={u.image} alt="" className="h-full w-full scale-110 object-cover blur-md" />
-                  <span className="absolute inset-0 flex items-center justify-center bg-lavender/60 text-lavender-700"><LockIcon open={false} className="h-6 w-6" /></span>
+                  <span className="absolute inset-0 flex items-center justify-center bg-[#EAEAEA]/60 text-ink-soft"><LockIcon open={false} className="h-6 w-6" /></span>
                 </div>
               )}
             </div>

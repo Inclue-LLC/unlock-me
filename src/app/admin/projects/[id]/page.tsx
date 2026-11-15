@@ -98,7 +98,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           <details key={u.id} className="rounded-2xl border border-line p-4">
             <summary className="flex cursor-pointer flex-wrap items-center gap-2 text-sm">
               <b>UNLOCK {String(i + 1).padStart(2, "0")}</b><span>{num(u.target_qty)}個</span><span>{u.title}</span>
-              <span className={`chip ${u.achieved_at ? "bg-pink-600 text-white" : "bg-lavender-100 text-lavender-700"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
+              <span className={`chip ${u.achieved_at ? "bg-pink-600 text-white" : "bg-[#F2F2F2] text-ink-soft"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
               {u.confirmed !== null && <span className="chip bg-cream">{u.confirmed ? "確定" : "未達確定"}</span>}
               <span className="text-[11px] text-ink-soft">{u.kind === "productization" ? "商品化" : "特典"}</span>
             </summary>
@@ -119,7 +119,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           </details>
         ))}
         {!locked && (
-          <form action={saveUnlockAction} className="grid gap-3 rounded-2xl bg-lavender-50 p-4 md:grid-cols-[8rem_1fr]">
+          <form action={saveUnlockAction} className="grid gap-3 rounded-2xl bg-[#F7F7F7] p-4 md:grid-cols-[8rem_1fr]">
             <p className="text-sm font-bold md:col-span-2">＋ UNLOCK条件を追加</p>
             <input type="hidden" name="id" value={p.id} />
             <UnlockFields published={published} />

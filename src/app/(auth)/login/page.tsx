@@ -22,7 +22,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         <SubmitButton className="btn-primary w-full">ログイン</SubmitButton>
       </form>
       <div className="mt-6 space-y-2 text-center text-xs">
-        <p><Link href="/forgot" className="text-lavender-700 underline">パスワードをお忘れの方</Link></p>
+        <p><Link href="/forgot" className="text-ink-soft underline">パスワードをお忘れの方</Link></p>
         <p>はじめての方は <Link href={`/signup?next=${encodeURIComponent(next)}`} className="font-bold text-pink-700 underline">会員登録</Link></p>
       </div>
     </AuthCard>

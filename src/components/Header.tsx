@@ -11,15 +11,15 @@ export async function Header() {
           <Logo className="text-base" />
         </Link>
         <nav className="flex items-center gap-2 text-xs font-bold">
-          <Link href="/projects" className="hidden rounded-full px-3 py-2 hover:bg-lavender-100 sm:inline">プロジェクト一覧</Link>
+          <Link href="/projects" className="hidden rounded-full px-3 py-2 hover:bg-[#F2F2F2] sm:inline">プロジェクト一覧</Link>
           {user?.role === "admin" && (
-            <Link href="/admin" className="rounded-full px-3 py-2 text-lavender-700 hover:bg-lavender-100">管理</Link>
+            <Link href="/admin" className="rounded-full px-3 py-2 text-ink-soft hover:bg-[#F2F2F2]">管理</Link>
           )}
           {user ? (
             <Link href="/mypage" className="btn-soft btn-sm">マイページ</Link>
           ) : (
             <>
-              <Link href="/login" className="rounded-full px-3 py-2 hover:bg-lavender-100">ログイン</Link>
+              <Link href="/login" className="rounded-full px-3 py-2 hover:bg-[#F2F2F2]">ログイン</Link>
               <Link href="/signup" className="btn-primary btn-sm">会員登録</Link>
             </>
           )}
