@@ -31,7 +31,7 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
 
   return (
     <div className="container-app max-w-2xl py-8">
-      <Link href={`/projects/${slug}`} className="text-xs text-gray-600">← 商品ページに戻る</Link>
+      <Link href={`/projects/${slug}`} className="text-xs text-lavender-700">← 商品ページに戻る</Link>
       <h1 className="mt-2 text-xl font-black">購入申込</h1>
       <p className="mt-1 text-sm text-ink-soft">{p.title}</p>
       <div className="mt-4"><Flash ok={sp.ok} error={sp.error} /></div>
@@ -67,8 +67,8 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
               ) : (
                 <div className="space-y-2">
                   {addresses.map((a) => (
-                    <label key={a.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-brand has-[:checked]:bg-brand-50">
-                      <input type="radio" name="address" value={a.id} defaultChecked={a.id === selectedAddr} required className="mt-1 accent-brand" />
+                    <label key={a.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-600 has-[:checked]:bg-pink-50">
+                      <input type="radio" name="address" value={a.id} defaultChecked={a.id === selectedAddr} required className="mt-1 accent-pink-600" />
                       <span>{formatAddress(a)}</span>
                     </label>
                   ))}
@@ -84,17 +84,17 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
               ) : (
                 <div className="space-y-2">
                   {pms.map((m) => (
-                    <label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-brand has-[:checked]:bg-brand-50">
-                      <input type="radio" name="pm" value={m.id} defaultChecked={m.id === selectedPm} required className="accent-brand" />
+                    <label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-600 has-[:checked]:bg-pink-50">
+                      <input type="radio" name="pm" value={m.id} defaultChecked={m.id === selectedPm} required className="accent-pink-600" />
                       <span>{m.brand} •••• {m.last4}{m.exp_month ? `（有効期限 ${m.exp_month}/${String(m.exp_year).slice(-2)}）` : ""}</span>
                     </label>
                   ))}
-                  <Link href={`/mypage/payment-methods?next=${encodeURIComponent(here)}`} className="inline-block text-xs text-gray-600 underline">別のお支払い方法を追加</Link>
+                  <Link href={`/mypage/payment-methods?next=${encodeURIComponent(here)}`} className="inline-block text-xs text-lavender-700 underline">別のお支払い方法を追加</Link>
                 </div>
               )}
             </section>
 
-            <button type="submit" className="btn-cta w-full py-4" disabled={addresses.length === 0 || pms.length === 0}>申込内容を確認する</button>
+            <button type="submit" className="btn-pink w-full py-4" disabled={addresses.length === 0 || pms.length === 0}>申込内容を確認する</button>
           </form>
 
           {addresses.length === 0 && (

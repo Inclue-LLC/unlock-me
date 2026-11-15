@@ -76,8 +76,8 @@ export default async function ProjectPage({ params }: Props) {
         <div className="space-y-5">
           <div>
             <div className="mb-2 flex flex-wrap gap-2">
-              {p.category && <span className="chip bg-gray-100 text-gray-600">{p.category}</span>}
-              <span className={`chip ${isOpen ? "bg-brand text-white" : "bg-white text-ink-soft border border-line"}`}>{PROJECT_STATUS_LABEL[p.status]}</span>
+              {p.category && <span className="chip bg-lavender-100 text-lavender-700">{p.category}</span>}
+              <span className={`chip ${isOpen ? "bg-violet text-white" : "bg-white text-ink-soft border border-line"}`}>{PROJECT_STATUS_LABEL[p.status]}</span>
             </div>
             <h1 className="text-xl font-black leading-snug sm:text-2xl">{p.title}</h1>
             {p.seller_name && <p className="mt-1 text-xs text-ink-soft">by {p.seller_name}</p>}
@@ -99,22 +99,22 @@ export default async function ProjectPage({ params }: Props) {
             {p.status === "open" && (
               prog.next ? (
                 <div className="vault relative overflow-hidden rounded-2xl p-4">
-                  <span className="absolute right-0 top-0 rounded-bl-xl bg-next px-3 py-1 text-[10px] font-black tracking-widest text-ink">NEXT UNLOCK</span>
+                  <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT UNLOCK</span>
                   <div className="flex items-center gap-3">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-gray-600 ring-1 ring-white">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-lavender-700 ring-1 ring-white">
                       <LockIcon open={false} className="h-7 w-7" />
                     </span>
                     <div className="min-w-0">
-                      <p className="text-[11px] font-black tracking-widest text-gray-600">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}</p>
+                      <p className="text-[11px] font-black tracking-widest text-lavender-700">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}</p>
                       <p className="truncate font-bold">{prog.next.title}</p>
                     </div>
                   </div>
                   <p className="mt-3 text-right text-sm text-ink-soft">
-                    解放まで <b className="text-3xl font-black tabular-nums text-ink">あと{num(prog.remaining)}</b><span className="text-ink">個</span>
+                    解放まで <b className="text-3xl font-black tabular-nums text-pink-700">あと{num(prog.remaining)}</b><span className="text-ink">個</span>
                   </p>
                 </div>
               ) : unlocks.length > 0 ? (
-                <div className="unlocked-glow flex items-center gap-3 rounded-2xl p-4 font-black text-unlock-700">
+                <div className="unlocked-glow flex items-center gap-3 rounded-2xl p-4 font-black text-pink-700">
                   <LockIcon open className="h-7 w-7" /> すべてのUNLOCKを達成しました！
                 </div>
               ) : null
@@ -128,14 +128,14 @@ export default async function ProjectPage({ params }: Props) {
               user && mine >= p.max_per_user ? (
                 <p className="notice-info">お一人様の上限（{p.max_per_user}個）まで申込済みです。</p>
               ) : (
-                <Link href={`/projects/${p.slug}/apply`} className="btn-cta w-full py-4 text-base">
+                <Link href={`/projects/${p.slug}/apply`} className="btn-pink w-full py-4 text-base">
                   <LockIcon open className="h-5 w-5" /> 購入を申し込んでUNLOCKに参加
                 </Link>
               )
             ) : null}
-            {mine > 0 && <p className="text-center text-xs text-gray-600">あなたは {mine}個 申込済みです（<Link href="/mypage" className="underline">マイページ</Link>）</p>}
+            {mine > 0 && <p className="text-center text-xs text-lavender-700">あなたは {mine}個 申込済みです（<Link href="/mypage" className="underline">マイページ</Link>）</p>}
 
-            <ul className="space-y-1 rounded-xl bg-gray-50 p-4 text-[11px] leading-relaxed text-ink-soft">
+            <ul className="space-y-1 rounded-xl bg-cream p-4 text-[11px] leading-relaxed text-ink-soft">
               <li>・本商品は<b>条件付き商品化</b>です。募集終了時に申込数量が {num(prog.minTarget)}個 に達した場合のみ商品化されます。</li>
               <li>・<b>決済</b>は申込時には行わず、成立後に登録済みのお支払い方法で行います。不成立の場合、代金は請求されません。</li>
               <li>・<b>発送</b>予定：{p.ship_estimate || "成立後にご案内します"}</li>
@@ -177,8 +177,8 @@ export default async function ProjectPage({ params }: Props) {
         </section>
         <section>
           <h2 className="section-title">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 text-gray-600"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
-            UNLOCK条件<span className="text-sm font-bold text-unlock-700">{prog.achievedCount}/{prog.count} 解放</span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-lavender text-lavender-700"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
+            UNLOCK条件<span className="text-sm font-bold text-pink-700">{prog.achievedCount}/{prog.count} 解放</span>
           </h2>
           {unlocks.length === 0 ? (
             <p className="text-sm text-ink-soft">UNLOCK条件は未設定です。</p>

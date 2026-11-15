@@ -47,7 +47,7 @@ export default async function Notifications({ searchParams }: { searchParams: Pr
                 <tr key={n.id}>
                   <td>{n.id}</td><td className="text-xs">{n.to_email}</td>
                   <td className="max-w-md"><details><summary className="cursor-pointer">{n.subject}</summary><pre className="mt-2 whitespace-pre-wrap text-[11px]">{n.body}</pre></details></td>
-                  <td>{n.status}{n.error && <p className="text-[10px] text-brand-700">{n.error}</p>}</td>
+                  <td>{n.status}{n.error && <p className="text-[10px] text-pink-700">{n.error}</p>}</td>
                   <td className="whitespace-nowrap text-xs">{fmtDateTime(n.created_at)}</td>
                   <td className="whitespace-nowrap text-xs">{fmtDateTime(n.sent_at)}</td>
                   <td>{n.status !== "queued" && <form action={resendNotificationAction}><input type="hidden" name="nid" value={n.id} /><SubmitButton className="btn-outline btn-sm">再送</SubmitButton></form>}</td>

@@ -17,7 +17,7 @@ export default async function VerifyPage({ searchParams }: { searchParams: Promi
         {ok ? (
           <div className="space-y-4 text-center text-sm">
             <p>メールアドレスの確認が完了しました。<br />さっそくプロジェクトに参加しましょう！</p>
-            <Link href="/" className="btn-cta w-full">プロジェクトを見る</Link>
+            <Link href="/" className="btn-pink w-full">プロジェクトを見る</Link>
           </div>
         ) : (
           <div className="space-y-4 text-center text-sm">

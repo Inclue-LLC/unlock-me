@@ -31,8 +31,8 @@ export function ProjectFields({ p, sellers }: { p?: Project; sellers: { id: numb
       <F label="再決済期限（成立後の決済失敗から何日）"><input name="payment_retry_days" type="number" min={0} max={60} required defaultValue={p?.payment_retry_days ?? 7} className="input" /></F>
       <F label="表示順（小さいほど先頭）"><input name="sort_order" type="number" defaultValue={p?.sort_order ?? 0} className="input" /></F>
       <div className="flex flex-wrap gap-6 md:col-span-2">
-        <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="allow_cancel" defaultChecked={p?.allow_cancel ?? true} className="accent-brand" />募集期間中のユーザーキャンセルを許可</label>
-        <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="is_featured" defaultChecked={p?.is_featured} className="accent-brand" />おすすめに表示</label>
+        <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="allow_cancel" defaultChecked={p?.allow_cancel ?? true} className="accent-pink-600" />募集期間中のユーザーキャンセルを許可</label>
+        <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="is_featured" defaultChecked={p?.is_featured} className="accent-pink-600" />おすすめに表示</label>
       </div>
       <F label="注意事項" className="md:col-span-2"><textarea name="notes" rows={4} defaultValue={p?.notes} className="input" /></F>
       <F label="メイン画像">

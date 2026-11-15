@@ -28,7 +28,7 @@ export default async function PaymentMethodsPage({ searchParams }: { searchParam
                 <span>
                   💳 {m.brand} •••• {m.last4}
                   {m.exp_month && <span className="ml-2 text-xs text-ink-soft">有効期限 {m.exp_month}/{String(m.exp_year).slice(-2)}</span>}
-                  {m.is_default && <span className="chip ml-2 bg-gray-100 text-gray-600">既定</span>}
+                  {m.is_default && <span className="chip ml-2 bg-lavender-100 text-lavender-700">既定</span>}
                 </span>
                 <span className="flex gap-2">
                   {!m.is_default && (
@@ -51,8 +51,8 @@ export default async function PaymentMethodsPage({ searchParams }: { searchParam
             <form action={addMockCardAction} className="space-y-3">
               <input type="hidden" name="next" value={next} />
               {Object.entries(MOCK_CARDS).map(([k, c], i) => (
-                <label key={k} className="flex items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-brand">
-                  <input type="radio" name="kind" value={k} defaultChecked={i === 0} className="accent-brand" />
+                <label key={k} className="flex items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-600">
+                  <input type="radio" name="kind" value={k} defaultChecked={i === 0} className="accent-pink-600" />
                   {c.brand} •••• {c.last4}（{c.label}）
                 </label>
               ))}

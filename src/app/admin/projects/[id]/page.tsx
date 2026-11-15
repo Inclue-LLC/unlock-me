@@ -60,7 +60,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
       <section className="card space-y-4 p-5">
         <div className="flex flex-wrap items-center gap-3">
           <ProjectStatusChip s={p.status} />
-          {p.fulfillment_status !== "none" && <span className="chip bg-gray-50">履行：{FULFILLMENT_LABEL[p.fulfillment_status]}</span>}
+          {p.fulfillment_status !== "none" && <span className="chip bg-cream">履行：{FULFILLMENT_LABEL[p.fulfillment_status]}</span>}
           <span className="text-xs text-ink-soft">公開 {fmtDateTime(p.published_at) || "—"}・判定 {fmtDateTime(p.judged_at) || "—"}</span>
         </div>
         <div className="grid grid-cols-2 gap-3 text-sm md:grid-cols-6">
@@ -68,12 +68,12 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           <div><p className="text-xs text-ink-soft">有効注文</p><p className="text-xl font-black">{num(stats.active)}</p></div>
           <div><p className="text-xs text-ink-soft">参加者</p><p className="text-xl font-black">{num(stats.users)}</p></div>
           <div><p className="text-xs text-ink-soft">決済済み</p><p className="text-xl font-black">{num(stats.paid)}</p></div>
-          <div><p className="text-xs text-ink-soft">決済待ち／失敗</p><p className="text-xl font-black">{stats.awaiting}／<span className="text-red-700">{stats.failed}</span></p></div>
+          <div><p className="text-xs text-ink-soft">決済待ち／失敗</p><p className="text-xl font-black">{stats.awaiting}／<span className="text-pink-700">{stats.failed}</span></p></div>
           <div><p className="text-xs text-ink-soft">売上</p><p className="text-xl font-black">{yen(stats.sales)}</p></div>
         </div>
         <ProgressBar total={total} targets={unlocks.map((u) => u.target_qty)} />
         <div className="flex flex-wrap gap-2">
-          {p.status === "draft" && state("publish", "公開する", "btn-cta btn-sm", "公開しますか？開始日時前の場合は「公開予定」になります。")}
+          {p.status === "draft" && state("publish", "公開する", "btn-pink btn-sm", "公開しますか？開始日時前の場合は「公開予定」になります。")}
           {["scheduled", "open", "suspended"].includes(p.status) && Number(stats.active) === 0 && state("unpublish", "下書きに戻す")}
           {["scheduled", "open"].includes(p.status) && state("suspend", "停止する", "btn-danger btn-sm", "申込受付を停止しますか？", true)}
           {p.status === "suspended" && state("resume", "再開する", "btn-soft btn-sm")}
@@ -92,14 +92,14 @@ export default async function EditProject({ params, searchParams }: { params: Pr
 
       {/* UNLOCK条件 */}
       <section id="unlocks" className="card space-y-4 p-5">
-        <h2 className="section-title"><LockIcon open className="h-5 w-5 text-unlock" />UNLOCK条件</h2>
-        <p className="text-xs text-ink-soft">目標数量の昇順で表示されます。最小の目標数量が「商品化（最低成立条件）」、以降が累積の追加特典です。{published && <b className="text-brand-700"> 公開後の変更は例外変更理由が必須で、参加者へ通知されます。</b>}</p>
+        <h2 className="section-title"><LockIcon open className="h-5 w-5 text-pink-600" />UNLOCK条件</h2>
+        <p className="text-xs text-ink-soft">目標数量の昇順で表示されます。最小の目標数量が「商品化（最低成立条件）」、以降が累積の追加特典です。{published && <b className="text-pink-700"> 公開後の変更は例外変更理由が必須で、参加者へ通知されます。</b>}</p>
         {unlocks.map((u, i) => (
           <details key={u.id} className="rounded-2xl border border-line p-4">
             <summary className="flex cursor-pointer flex-wrap items-center gap-2 text-sm">
               <b>UNLOCK {String(i + 1).padStart(2, "0")}</b><span>{num(u.target_qty)}個</span><span>{u.title}</span>
-              <span className={`chip ${u.achieved_at ? "bg-unlock text-white" : "bg-gray-100 text-gray-600"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
-              {u.confirmed !== null && <span className="chip bg-gray-50">{u.confirmed ? "確定" : "未達確定"}</span>}
+              <span className={`chip ${u.achieved_at ? "bg-pink-600 text-white" : "bg-lavender-100 text-lavender-700"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
+              {u.confirmed !== null && <span className="chip bg-cream">{u.confirmed ? "確定" : "未達確定"}</span>}
               <span className="text-[11px] text-ink-soft">{u.kind === "productization" ? "商品化" : "特典"}</span>
             </summary>
             {!locked && (
@@ -119,7 +119,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           </details>
         ))}
         {!locked && (
-          <form action={saveUnlockAction} className="grid gap-3 rounded-2xl bg-gray-50 p-4 md:grid-cols-[8rem_1fr]">
+          <form action={saveUnlockAction} className="grid gap-3 rounded-2xl bg-lavender-50 p-4 md:grid-cols-[8rem_1fr]">
             <p className="text-sm font-bold md:col-span-2">＋ UNLOCK条件を追加</p>
             <input type="hidden" name="id" value={p.id} />
             <UnlockFields published={published} />
@@ -154,7 +154,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
             <F label="名称"><input name="name" defaultValue={v?.name} required className="input py-2" placeholder={v ? "" : "新規：ピンク / M"} /></F>
             <F label="SKU"><input name="sku" defaultValue={v?.sku} className="input w-32 py-2" /></F>
             <F label="表示順"><input name="sort_order" type="number" defaultValue={v?.sort_order ?? 0} className="input w-20 py-2" /></F>
-            <label className="mb-3 flex items-center gap-1 text-xs"><input type="checkbox" name="is_active" defaultChecked={v?.is_active ?? true} className="accent-brand" />受付中</label>
+            <label className="mb-3 flex items-center gap-1 text-xs"><input type="checkbox" name="is_active" defaultChecked={v?.is_active ?? true} className="accent-pink-600" />受付中</label>
             <SubmitButton className={v ? "btn-outline btn-sm" : "btn-primary btn-sm"}>{v ? "更新" : "追加"}</SubmitButton>
           </form>
         ))}
@@ -186,7 +186,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           {logs.map((l) => (
             <li key={l.id} className="flex flex-wrap gap-2">
               <span className="text-ink-soft">{fmtDateTime(l.created_at)}</span><b>{l.action}</b><span>{l.actor_label}</span>
-              {l.detail?.reason && <span className="text-amber-700">理由：{l.detail.reason}</span>}
+              {l.detail?.reason && <span className="text-pink-700">理由：{l.detail.reason}</span>}
             </li>
           ))}
         </ul>
