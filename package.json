@@ -1,0 +1,40 @@
+{
+  "name": "unlock-me",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UNLOCK ME - 購入申込数量に応じて商品化・特典がUNLOCKされる参加型ECプラットフォーム",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "db:migrate": "tsx --env-file-if-exists=.env scripts/migrate.ts",
+    "db:seed": "tsx --env-file-if-exists=.env scripts/seed.ts",
+    "db:reset": "tsx --env-file-if-exists=.env scripts/migrate.ts --reset && tsx --env-file-if-exists=.env scripts/seed.ts",
+    "worker": "tsx --env-file-if-exists=.env scripts/worker.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "next": "^15.5.29",
+    "nodemailer": "^8.0.0",
+    "pg": "^8.23.1",
+    "react": "^19.1.10",
+    "react-dom": "^19.1.10",
+    "server-only": "^0.0.1",
+    "stripe": "^23.1.0",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^22.20.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.1.18",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
