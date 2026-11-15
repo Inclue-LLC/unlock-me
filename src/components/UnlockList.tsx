@@ -55,17 +55,17 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
           return (
             <li key={u.id} className={`unlocked-glow relative overflow-hidden rounded-2xl p-4 ${animate ? "animate-unlock" : ""}`}>
               <div className="flex items-center gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-pink-600 text-white shadow-md">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-unlock text-white shadow-md">
                   <LockIcon open className="h-7 w-7" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[11px] font-black tracking-widest text-pink-700">{label}・{n(u.target_qty)}個 達成</p>
+                  <p className="text-[11px] font-black tracking-widest text-unlock-700">{label}・{n(u.target_qty)}個 達成</p>
                   <p className="mt-0.5 font-black leading-snug">{u.title}</p>
                   {u.description && <p className="mt-1 whitespace-pre-wrap text-xs text-ink-soft">{u.description}</p>}
                 </div>
                 {u.image && <img src={u.image} alt="" className={`h-16 w-16 shrink-0 rounded-xl object-cover ring-2 ring-white ${animate ? "animate-reveal" : ""}`} />}
               </div>
-              <span className="absolute right-3 top-3 rotate-6 rounded-md border-2 border-pink-600 px-1.5 text-[10px] font-black tracking-widest text-pink-600">
+              <span className="absolute right-3 top-3 rotate-6 rounded-md border-2 border-unlock px-1.5 text-[10px] font-black tracking-widest text-unlock-700">
                 UNLOCKED
               </span>
             </li>
@@ -73,33 +73,33 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
         }
 
         return (
-          <li key={u.id} className={`vault relative overflow-hidden rounded-2xl p-4 ${isNext ? "ring-4 ring-pink-600/70" : "opacity-95"}`}>
+          <li key={u.id} className={`vault relative overflow-hidden rounded-2xl p-4 ${isNext ? "ring-4 ring-next" : "opacity-95"}`}>
             {isNext && (
-              <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT</span>
+              <span className="absolute right-0 top-0 rounded-bl-xl bg-next px-3 py-1 text-[10px] font-black tracking-widest text-ink">NEXT</span>
             )}
             <div className="flex items-center gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-lavender-700 ring-1 ring-white">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-gray-600 ring-1 ring-white">
                 <LockIcon open={false} className="h-7 w-7" />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[11px] font-black tracking-widest text-lavender-700">{label}・{n(u.target_qty)}個で解放</p>
+                <p className="text-[11px] font-black tracking-widest text-gray-600">{label}・{n(u.target_qty)}個で解放</p>
                 <p className="mt-0.5 font-black leading-snug">{u.title}</p>
                 {u.description && <p className="mt-1 whitespace-pre-wrap text-xs text-ink-soft">{u.description}</p>}
               </div>
               {u.image && (
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-2 ring-white">
                   <img src={u.image} alt="" className="h-full w-full scale-110 object-cover blur-md" />
-                  <span className="absolute inset-0 flex items-center justify-center bg-lavender/60 text-lavender-700"><LockIcon open={false} className="h-6 w-6" /></span>
+                  <span className="absolute inset-0 flex items-center justify-center bg-gray-200/60 text-gray-600"><LockIcon open={false} className="h-6 w-6" /></span>
                 </div>
               )}
             </div>
             {!final ? (
               <div className="mt-3">
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/60">
-                  <div className="h-full rounded-full bg-pink-600" style={{ width: `${segPct}%` }} />
+                  <div className="h-full rounded-full bg-brand" style={{ width: `${segPct}%` }} />
                 </div>
                 <p className="mt-1.5 text-right text-xs text-ink-soft">
-                  UNLOCKまで <b className={`tabular-nums ${isNext ? "text-base text-pink-700" : "text-ink"}`}>あと{n(u.target_qty - total)}個</b>
+                  UNLOCKまで <b className={`tabular-nums ${isNext ? "text-base text-ink" : "text-ink"}`}>あと{n(u.target_qty - total)}個</b>
                 </p>
               </div>
             ) : (

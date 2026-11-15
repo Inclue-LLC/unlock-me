@@ -20,22 +20,22 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const empty = data.every((d) => d.length === 0);
   return (
     <>
-      <section className="relative overflow-hidden bg-lavender-50">
+      <section className="relative overflow-hidden bg-gray-50">
         <div className="container-app relative grid items-center gap-6 py-12 sm:grid-cols-[1.3fr_1fr] sm:py-16">
           <div>
-            <p className="chip mb-4 bg-white text-lavender-700 shadow-sm"><LockIcon open className="h-3.5 w-3.5" /> UNLOCK · SHARE · CREATE</p>
+            <p className="chip mb-4 bg-white text-gray-600 shadow-sm"><LockIcon open className="h-3.5 w-3.5" /> UNLOCK · SHARE · CREATE</p>
             <h1 className="text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
               みんなで、<br />
               <span className="whitespace-nowrap">欲しいものを</span>
               <br className="sm:hidden" />
-              <span className="whitespace-nowrap"><span className="text-pink-600">解放</span>する。</span>
+              <span className="whitespace-nowrap"><span className="text-brand">解放</span>する。</span>
             </h1>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-soft">
               申込が目標数量に届くと<b className="text-ink">商品化がUNLOCK</b>。
               さらに増えると<b className="text-ink">限定特典</b>が次々とUNLOCKされます。
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/projects" className="btn-pink">
+              <Link href="/projects" className="btn-cta">
                 <LockIcon open className="h-4 w-4" /> プロジェクトを見る
               </Link>
               <Link href="/guide" className="btn-outline">UNLOCK MEとは？</Link>
@@ -53,15 +53,15 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
             <section key={s.key}>
               <div className="mb-4 flex items-end justify-between">
                 <h2 className="flex items-center gap-2 text-xl font-black">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-lavender text-lavender-700">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 text-gray-600">
                     <LockIcon open={s.key === "unlocked"} className="h-4.5 w-4.5" />
                   </span>
                   <span>
-                    <span className="block text-[10px] tracking-[0.2em] text-pink-600">{s.sub}</span>
+                    <span className="block text-[10px] tracking-[0.2em] text-brand">{s.sub}</span>
                     {s.title}
                   </span>
                 </h2>
-                <Link href="/projects" className="text-xs font-bold text-lavender-700">すべて見る →</Link>
+                <Link href="/projects" className="text-xs font-bold text-gray-600">すべて見る →</Link>
               </div>
               <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
                 {data[i].map((p) => <ProjectCard key={p.id} p={p} />)}
@@ -89,7 +89,7 @@ function HowItWorks() {
       <ol className="grid gap-3 sm:grid-cols-5">
         {steps.map(([t, d, open], i) => (
           <li key={t} className={`rounded-2xl p-4 ${open ? "unlocked-glow" : "vault"}`}>
-            <span className={`flex items-center gap-1.5 text-[11px] font-black ${open ? "text-pink-700" : "text-lavender-700"}`}>
+            <span className={`flex items-center gap-1.5 text-[11px] font-black ${open ? "text-unlock-700" : "text-gray-600"}`}>
               <LockIcon open={open} className="h-4 w-4" /> STEP {i + 1}
             </span>
             <p className={`mt-1 font-black`}>{t}</p>

@@ -11,7 +11,7 @@
 | --- | --- |
 | アプリ | Next.js 15（App Router / Server Actions）+ React 19 + TypeScript |
 | DB | PostgreSQL（`pg`、SQLマイグレーション `db/migrations/`） |
-| スタイル | Tailwind CSS v4（POP BASE カラー：Lavender `#DCCEF5` / Pink `#F7C9D8` / Cream `#FFF4F1`） |
+| スタイル | Tailwind CSS v4（1色1役割：青=操作、緑=UNLOCKED、グレー=LOCKED、黄=NEXT、赤=エラー） |
 | 決済 | プロバイダ抽象化：`mock`（開発用）／ `stripe`（SetupIntent + 成立後オフセッション課金） |
 | メール | `log`（`.mail/` に書き出し）／ `smtp`（nodemailer） |
 | 定期処理 | `npm run worker`（常駐）または `POST /api/cron/tick` |

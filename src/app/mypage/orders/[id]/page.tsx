@@ -48,11 +48,11 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
-      <Link href="/mypage" className="text-xs text-lavender-700">← 申込・注文一覧</Link>
+      <Link href="/mypage" className="text-xs text-gray-600">← 申込・注文一覧</Link>
       {sp.applied && (
         <div className="card overflow-hidden">
-          <div className="bg-gradient-to-br from-lavender to-pink p-6 text-center">
-            <LockIcon open className="mx-auto h-10 w-10 text-pink-700" />
+          <div className="bg-gradient-to-br from-brand-50 to-unlock-100 p-6 text-center">
+            <LockIcon open className="mx-auto h-10 w-10 text-unlock" />
             <p className="mt-2 text-lg font-black">申込が完了しました！</p>
             <p className="text-xs text-ink-soft">確認メールをお送りしました。シェアしてUNLOCKを近づけよう</p>
           </div>
@@ -66,8 +66,8 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
       <div className="card p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="chip bg-violet text-white">{ORDER_STATUS_LABEL[status]}</span>
-          {o.fulfillment_status !== "none" && <span className="chip bg-cream">{FULFILLMENT_LABEL[o.fulfillment_status]}</span>}
+          <span className="chip bg-brand text-white">{ORDER_STATUS_LABEL[status]}</span>
+          {o.fulfillment_status !== "none" && <span className="chip bg-gray-50">{FULFILLMENT_LABEL[o.fulfillment_status]}</span>}
           <span className="text-xs text-ink-soft">申込番号 {o.number}</span>
         </div>
         <Link href={`/projects/${o.slug}`} className="mt-2 block text-lg font-black hover:underline">{o.title}</Link>
@@ -87,14 +87,14 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
       {/* UNLOCK状況 */}
       <div className="card p-5">
-        <h2 className="section-title text-base"><LockIcon open className="h-5 w-5 text-pink-600" />UNLOCK状況</h2>
-        <p className="mb-3 text-sm">{o.final_qty !== null ? "最終" : "現在"} <b className="text-pink-700">{num(total)}個</b>・{prog.achievedCount}/{prog.count} UNLOCKED{prog.next && status === "applied" ? `・次まであと${num(prog.remaining)}個` : ""}</p>
+        <h2 className="section-title text-base"><LockIcon open className="h-5 w-5 text-unlock" />UNLOCK状況</h2>
+        <p className="mb-3 text-sm">{o.final_qty !== null ? "最終" : "現在"} <b className="text-brand-700">{num(total)}個</b>・{prog.achievedCount}/{prog.count} UNLOCKED{prog.next && status === "applied" ? `・次まであと${num(prog.remaining)}個` : ""}</p>
         <ul className="space-y-2 text-sm">
           {unlocks.map((u, i) => {
             const open = o.final_qty !== null ? u.confirmed === true : u.achieved_at !== null;
             return (
               <li key={u.id} className="flex items-center gap-2">
-                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-600" : "text-lavender-300"}`} />
+                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-unlock" : "text-gray-400"}`} />
                 <span className="text-xs text-ink-soft">{String(i + 1).padStart(2, "0")} / {num(u.target_qty)}個</span>
                 <span className={open ? "font-bold" : "text-ink-soft"}>{u.title}</span>
               </li>
@@ -102,8 +102,8 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
           })}
         </ul>
         {rewards.length > 0 && (
-          <div className="mt-4 rounded-xl bg-pink-50 p-4 text-sm">
-            <p className="mb-1 text-xs font-bold text-pink-700">確定特典</p>
+          <div className="mt-4 rounded-xl bg-unlock-50 p-4 text-sm">
+            <p className="mb-1 text-xs font-bold text-unlock-700">確定特典</p>
             {rewards.map((r) => <p key={r.id}>🎁 {r.title} × {r.quantity}</p>)}
           </div>
         )}
@@ -125,14 +125,14 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
       {/* 決済失敗 → 再決済 */}
       {status === "payment_failed" && (
-        <form action={retryPaymentAction} className="card space-y-3 border-pink-300 p-5">
-          <h2 className="font-bold text-pink-700">お支払い方法を更新して再決済してください</h2>
+        <form action={retryPaymentAction} className="card space-y-3 border-red-300 p-5">
+          <h2 className="font-bold text-red-700">お支払い方法を更新して再決済してください</h2>
           <p className="text-xs">期限：<b>{fmtDateTime(o.payment_due_at)}</b>（期限を過ぎるとご注文は取消となります）</p>
           {payments[0]?.error_message && <p className="text-xs text-ink-soft">前回のエラー：{payments[0].error_message}</p>}
           <input type="hidden" name="id" value={o.id} />
           <PmSelect pms={pms} selected={Number(o.payment_method_id)} />
           <div className="flex flex-wrap gap-2">
-            <SubmitButton className="btn-pink" pendingText="決済中…">{yen(o.amount)} を決済する</SubmitButton>
+            <SubmitButton className="btn-cta" pendingText="決済中…">{yen(o.amount)} を決済する</SubmitButton>
             <Link href={`/mypage/payment-methods?next=/mypage/orders/${o.id}`} className="btn-outline">カードを追加</Link>
           </div>
         </form>
@@ -156,8 +156,8 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
           <form action={changeOrderAddressAction} className="mt-3 space-y-2">
             <input type="hidden" name="id" value={o.id} />
             {addresses.map((a) => (
-              <label key={a.id} className="flex items-start gap-2 rounded-xl border border-line p-3 text-xs has-[:checked]:border-pink-600">
-                <input type="radio" name="address" value={a.id} defaultChecked={Number(o.address_id) === a.id} className="mt-0.5 accent-pink-600" />
+              <label key={a.id} className="flex items-start gap-2 rounded-xl border border-line p-3 text-xs has-[:checked]:border-brand">
+                <input type="radio" name="address" value={a.id} defaultChecked={Number(o.address_id) === a.id} className="mt-0.5 accent-brand" />
                 {formatAddress(a)}
               </label>
             ))}

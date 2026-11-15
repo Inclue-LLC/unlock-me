@@ -13,10 +13,10 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "マイページ" };
 
 const STATUS_STYLE: Partial<Record<OrderStatus, string>> = {
-  applied: "bg-lavender-100 text-lavender-700",
-  awaiting_payment: "bg-lavender-100 text-lavender-700",
-  payment_failed: "bg-pink-600 text-white",
-  paid: "bg-[#E3F5EA] text-[#2F7A51]",
+  applied: "bg-gray-100 text-gray-600",
+  awaiting_payment: "bg-gray-100 text-gray-600",
+  payment_failed: "bg-red-600 text-white",
+  paid: "bg-unlock-100 text-unlock-700",
 };
 
 export default async function MyPage({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
@@ -48,7 +48,7 @@ export default async function MyPage({ searchParams }: { searchParams: Promise<R
       {orders.length === 0 && (
         <div className="card p-8 text-center text-sm">
           <p className="mb-4 text-ink-soft">まだ申込はありません。</p>
-          <Link href="/projects" className="btn-pink">プロジェクトを探す</Link>
+          <Link href="/projects" className="btn-cta">プロジェクトを探す</Link>
         </div>
       )}
       {groups.map(([label, list]) =>
@@ -65,7 +65,7 @@ export default async function MyPage({ searchParams }: { searchParams: Promise<R
                     <div className="min-w-0 flex-1 space-y-1.5">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className={`chip ${STATUS_STYLE[o.status as OrderStatus] ?? "bg-white border border-line text-ink-soft"}`}>{ORDER_STATUS_LABEL[o.status as OrderStatus]}</span>
-                        {o.fulfillment_status !== "none" && <span className="chip bg-cream text-ink">{FULFILLMENT_LABEL[o.fulfillment_status]}</span>}
+                        {o.fulfillment_status !== "none" && <span className="chip bg-gray-50 text-ink">{FULFILLMENT_LABEL[o.fulfillment_status]}</span>}
                         <span className="text-[11px] text-ink-soft">{o.number}・{fmtDate(o.created_at)}</span>
                       </div>
                       <p className="truncate text-sm font-bold">{o.title}</p>
@@ -74,9 +74,9 @@ export default async function MyPage({ searchParams }: { searchParams: Promise<R
                         <div className="space-y-1">
                           <ProgressBar total={total} targets={o.targets} compact />
                           <p className="flex items-center gap-1 text-[11px] text-ink-soft">
-                            <LockIcon open className="h-3.5 w-3.5 text-pink-600" />
+                            <LockIcon open className="h-3.5 w-3.5 text-unlock" />
                             {prog.achievedCount}/{prog.count} UNLOCKED・{num(total)}個
-                            {prog.next && <>・次まであと<b className="text-pink-700">{num(prog.remaining)}個</b></>}
+                            {prog.next && <>・次まであと<b className="text-brand-700">{num(prog.remaining)}個</b></>}
                           </p>
                         </div>
                       )}

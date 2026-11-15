@@ -24,7 +24,7 @@ export function StripeCardForm({ next }: { next: string }) {
     let el: StripeCardElement | null = null;
     getStripe().then((stripe) => {
       if (!stripe || !ref.current) return setError("決済設定が読み込めませんでした");
-      el = stripe.elements({ locale: "ja" }).create("card", { hidePostalCode: true, style: { base: { fontSize: "16px", color: "#3D3550" } } });
+      el = stripe.elements({ locale: "ja" }).create("card", { hidePostalCode: true, style: { base: { fontSize: "16px", color: "#1F2937" } } });
       el.mount(ref.current);
       setCard(el);
     });

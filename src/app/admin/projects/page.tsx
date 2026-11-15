@@ -23,7 +23,7 @@ export default async function AdminProjects() {
             {rows.map((p) => (
               <tr key={p.id}>
                 <td className="text-ink-soft">{p.id}</td>
-                <td><Link href={`/admin/projects/${p.id}`} className="font-bold hover:underline">{p.title}</Link>{p.is_featured && <span className="chip ml-1 bg-pink-50 text-pink-700">おすすめ</span>}</td>
+                <td><Link href={`/admin/projects/${p.id}`} className="font-bold hover:underline">{p.title}</Link>{p.is_featured && <span className="chip ml-1 bg-brand-50 text-brand-700">おすすめ</span>}</td>
                 <td><ProjectStatusChip s={p.status as ProjectStatus} /></td>
                 <td className="text-right">{yen(p.price)}</td>
                 <td className="text-right tabular-nums">{num(p.final_qty ?? p.total_qty)}</td>

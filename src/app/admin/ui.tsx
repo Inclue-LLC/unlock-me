@@ -11,16 +11,16 @@ export function PageTitle({ children, action }: { children: React.ReactNode; act
 }
 
 const PCOLOR: Record<ProjectStatus, string> = {
-  draft: "bg-white border border-line text-ink-soft", scheduled: "bg-lavender-100 text-lavender-700", open: "bg-violet text-white",
-  judging: "bg-pink-50 text-pink-700", succeeded: "bg-[#E3F5EA] text-[#2F7A51]", failed: "bg-pink-50 text-pink-700", suspended: "bg-pink-600 text-white",
+  draft: "bg-white border border-line text-ink-soft", scheduled: "bg-gray-100 text-gray-600", open: "bg-brand text-white",
+  judging: "bg-amber-100 text-amber-800", succeeded: "bg-unlock-100 text-unlock-700", failed: "bg-red-50 text-red-700", suspended: "bg-red-600 text-white",
 };
 export function ProjectStatusChip({ s }: { s: ProjectStatus }) {
   return <span className={`chip ${PCOLOR[s]}`}>{PROJECT_STATUS_LABEL[s]}</span>;
 }
 
 const OCOLOR: Partial<Record<OrderStatus, string>> = {
-  applied: "bg-lavender-100 text-lavender-700", awaiting_payment: "bg-lavender-100 text-lavender-700", payment_failed: "bg-pink-600 text-white",
-  paid: "bg-[#E3F5EA] text-[#2F7A51]",
+  applied: "bg-brand-50 text-brand-700", awaiting_payment: "bg-amber-100 text-amber-800", payment_failed: "bg-red-600 text-white",
+  paid: "bg-unlock-100 text-unlock-700",
 };
 export function OrderStatusChip({ s }: { s: OrderStatus }) {
   return <span className={`chip ${OCOLOR[s] ?? "bg-white border border-line text-ink-soft"}`}>{ORDER_STATUS_LABEL[s]}</span>;

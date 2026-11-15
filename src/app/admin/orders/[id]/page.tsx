@@ -50,7 +50,7 @@ export default async function AdminOrder({ params, searchParams }: { params: Pro
             <dt className="text-xs text-ink-soft">決済方法</dt><dd>{o.brand ? `${o.provider} ${o.brand} •••• ${o.last4}` : "—"}</dd>
             <dt className="text-xs text-ink-soft">配送先</dt><dd className="text-xs">{formatAddress(o.shipping_address)}<br />TEL {o.shipping_address.phone}</dd>
             <dt className="text-xs text-ink-soft">申込日時</dt><dd>{fmtDateTime(o.created_at)}（IP {o.client_ip || "—"}）</dd>
-            {o.payment_due_at && (<><dt className="text-xs text-ink-soft">再決済期限</dt><dd className="text-pink-700">{fmtDateTime(o.payment_due_at)}</dd></>)}
+            {o.payment_due_at && (<><dt className="text-xs text-ink-soft">再決済期限</dt><dd className="text-brand-700">{fmtDateTime(o.payment_due_at)}</dd></>)}
             {o.cancel_reason && (<><dt className="text-xs text-ink-soft">取消理由</dt><dd>{o.cancel_reason}</dd></>)}
           </dl>
         </section>
@@ -83,8 +83,8 @@ export default async function AdminOrder({ params, searchParams }: { params: Pro
             </div>
           )}
           {!["cancelled", "void", "refunded"].includes(status) && (
-            <form action={adminCancelOrderAction} className="card space-y-3 border-pink-300 p-5">
-              <h2 className="font-bold text-pink-700">運営取消{status === "paid" && "・返金"}</h2>
+            <form action={adminCancelOrderAction} className="card space-y-3 border-brand-200 p-5">
+              <h2 className="font-bold text-brand-700">運営取消{status === "paid" && "・返金"}</h2>
               <input type="hidden" name="id" value={o.id} />
               <input name="reason" required placeholder="取消理由（お客様へのメールに記載されます）" className="input" />
               <SubmitButton className="btn-danger btn-sm" confirm={status === "paid" ? "取消して全額返金します。よろしいですか？" : "取消しますか？"}>取消する</SubmitButton>

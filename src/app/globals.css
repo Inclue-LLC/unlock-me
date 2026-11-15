@@ -1,78 +1,78 @@
 @import "tailwindcss";
 
-/* POP BASE ブランドガイド準拠（近似値。正式値がある場合は差し替え） */
+/* シンプルな配色：1色1役割
+ *   brand  (青)   … ボタン・リンク・操作
+ *   unlock (緑)   … UNLOCKED（達成）
+ *   gray          … LOCKED（未達成）・基本の面
+ *   next   (黄)   … 次にUNLOCKする条件
+ *   red           … エラー・取消
+ */
 @theme {
-  --color-lavender: #DCCEF5;
-  --color-lavender-50: #F6F1FD;
-  --color-lavender-100: #EDE5FA;
-  --color-lavender-300: #C5B2EE;
-  --color-lavender-500: #9C83D6;
-  --color-lavender-700: #5B4796;
-  --color-pink: #F7C9D8;
-  --color-pink-50: #FDF2F6;
-  --color-pink-300: #F1A9C1;
-  --color-pink-500: #E57FA2;
-  --color-pink-600: #C9407A; /* 操作色（白文字コントラスト 4.67） */
-  --color-pink-700: #A82E62;
-  --color-cream: #FFF4F1;
-  --color-ink: #4E4470;      /* 文字（やわらかいプラム） */
-  --color-ink-2: #5E5382;
-  --color-ink-soft: #635A80;
-  --color-violet: #7E66C4;   /* 基本ボタン（白文字コントラスト 4.58） */
-  --color-violet-700: #6A52B3;
-  --color-paper: #FFF9F7;    /* 明るいクリーム背景 */
-  --color-line: #E6DCF0;
-  --font-sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
-  --radius-card: 1.25rem;
+  --color-brand: #2563EB;     /* 白文字コントラスト 5.17 */
+  --color-brand-700: #1D4ED8;
+  --color-brand-200: #BFDBFE;
+  --color-brand-100: #DBEAFE;
+  --color-brand-50: #EFF6FF;
+  --color-unlock: #16A34A;
+  --color-unlock-700: #15803D;  /* 白背景の文字 5.02 */
+  --color-unlock-300: #86EFAC;
+  --color-unlock-100: #DCFCE7;
+  --color-unlock-50: #F0FDF4;
+  --color-next: #FBBF24;
+  --color-next-50: #FFFBEB;
+  --color-ink: #1F2937;       /* 本文（黒ではなく濃いグレー） */
+  --color-ink-soft: #6B7280;
+  --color-line: #E5E7EB;
+  --font-sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --radius-card: 1rem;
 }
 
 @layer base {
   html { -webkit-text-size-adjust: 100%; }
   body {
-    background: var(--color-paper);
+    background: #FFFFFF;
     color: var(--color-ink);
     font-family: var(--font-sans);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
   }
   a { color: inherit; }
   h1, h2, h3 { letter-spacing: 0.04em; }
 }
 
 @utility container-app { @apply mx-auto w-full max-w-5xl px-4; }
-@utility card { @apply rounded-[var(--radius-card)] bg-white shadow-[0_4px_20px_rgba(156,131,214,0.12)] border border-line; }
+@utility card { @apply rounded-[var(--radius-card)] bg-white shadow-[0_1px_3px_rgba(17,24,39,0.06)] border border-line; }
 @utility btn {
     @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-bold transition
       disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer;
   }
-@utility btn-primary { @apply btn bg-violet text-white shadow-[0_6px_18px_-8px_rgba(126,102,196,0.7)] hover:bg-violet-700; }
-@utility btn-pink { @apply btn bg-pink-600 text-white shadow-[0_6px_20px_-6px_rgba(201,64,122,0.6)] hover:bg-pink-700; }
-@utility btn-soft { @apply btn bg-lavender-100 text-lavender-700 hover:bg-lavender; }
-@utility btn-outline { @apply btn border border-line bg-white text-ink hover:bg-lavender-50; }
-@utility btn-danger { @apply btn border border-pink-300 bg-white text-pink-700 hover:bg-pink-50; }
+@utility btn-primary { @apply btn bg-brand text-white hover:bg-brand-700; }
+@utility btn-cta { @apply btn bg-brand text-white shadow-[0_4px_12px_-4px_rgba(37,99,235,0.5)] hover:bg-brand-700; }
+@utility btn-soft { @apply btn bg-brand-50 text-brand-700 hover:bg-brand-100; }
+@utility btn-outline { @apply btn border border-gray-300 bg-white text-ink hover:bg-gray-50; }
+@utility btn-danger { @apply btn border border-red-300 bg-white text-red-700 hover:bg-red-50; }
 @utility btn-sm { @apply px-4 py-2 text-xs; }
 @utility label { @apply mb-1 block text-xs font-bold text-ink-soft; }
 @utility input {
     @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition
-      focus:border-lavender-500 focus:ring-4 focus:ring-lavender-100;
+      focus:border-brand focus:ring-4 focus:ring-brand-100;
   }
 @utility chip { @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-bold; }
 @utility section-title { @apply mb-4 flex items-center gap-2 text-lg font-bold; }
 @utility table { @apply w-full text-sm; }
 @utility notice { @apply rounded-2xl border px-4 py-3 text-sm; }
-@utility notice-info { @apply notice border-lavender-300 bg-lavender-50 text-lavender-700; }
-@utility notice-ok { @apply notice border-[#BFE5CF] bg-[#F0FAF4] text-[#2F7A51]; }
-@utility notice-error { @apply notice border-pink-300 bg-pink-50 text-pink-700; }
-/* LOCKED：ラベンダーの扉＋斜めストライプ */
+@utility notice-info { @apply notice border-brand-200 bg-brand-50 text-brand-700; }
+@utility notice-ok { @apply notice border-unlock-300 bg-unlock-50 text-unlock-700; }
+@utility notice-error { @apply notice border-red-300 bg-red-50 text-red-700; }
+/* LOCKED：グレー＋斜めストライプ（錠の模様） */
 @utility vault {
-  background-color: #E9DFF8;
-  background-image:
-    repeating-linear-gradient(135deg, rgba(255,255,255,0.5) 0 10px, transparent 10px 20px); /* 錠のストライプ（模様） */
+  background-color: #F3F4F6;
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.7) 0 10px, transparent 10px 20px);
   color: var(--color-ink);
 }
-/* UNLOCKED：明るく光る */
+/* UNLOCKED：緑の枠 */
 @utility unlocked-glow {
-  background: #FFFFFF;
-  box-shadow: 0 0 0 2px var(--color-pink-300), 0 10px 30px -10px rgba(201,64,122,0.45);
+  background: var(--color-unlock-50);
+  box-shadow: 0 0 0 2px var(--color-unlock);
 }
 
 @layer components {
@@ -98,9 +98,9 @@
   100% { transform: translateY(-3px) rotate(-28deg); }
 }
 @keyframes unlock-glow {
-  0% { box-shadow: 0 0 0 0 rgba(229,127,162,0.0); filter: saturate(0.6) brightness(0.96); }
-  50% { box-shadow: 0 0 0 10px rgba(229,127,162,0.18); }
-  100% { box-shadow: 0 0 0 0 rgba(229,127,162,0.0); filter: none; }
+  0% { box-shadow: 0 0 0 0 rgba(22,163,74,0); filter: saturate(0.6) brightness(0.96); }
+  50% { box-shadow: 0 0 0 10px rgba(22,163,74,0.2); }
+  100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); filter: none; }
 }
 @keyframes reveal {
   from { opacity: 0; transform: scale(0.9) translateY(6px); }

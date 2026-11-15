@@ -3,7 +3,7 @@
 export function ProjectImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
   if (!src) {
     return (
-      <div className={`flex items-center justify-center bg-lavender-100 ${className ?? ""}`} aria-label={alt}>
+      <div className={`flex items-center justify-center bg-gray-100 ${className ?? ""}`} aria-label={alt}>
         <span className="text-4xl">🧸</span>
       </div>
     );
