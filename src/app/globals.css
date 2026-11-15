@@ -7,16 +7,18 @@
   --color-lavender-100: #EDE5FA;
   --color-lavender-300: #C5B2EE;
   --color-lavender-500: #9C83D6;
-  --color-lavender-700: #6A55A8;
+  --color-lavender-700: #5B4796;
   --color-pink: #F7C9D8;
   --color-pink-50: #FDF2F6;
   --color-pink-300: #F1A9C1;
   --color-pink-500: #E57FA2;
-  --color-pink-700: #B9567A;
+  --color-pink-600: #C9407A; /* 操作色（白文字コントラスト 4.67） */
+  --color-pink-700: #A82E62;
   --color-cream: #FFF4F1;
-  --color-ink: #3D3550;
-  --color-ink-soft: #6F6782;
-  --color-line: #ECE4F3;
+  --color-ink: #2B2340;      /* LOCKED（金庫）色 */
+  --color-ink-2: #3A2F57;
+  --color-ink-soft: #5A5170;
+  --color-line: #E6DCF0;
   --font-sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
   --radius-card: 1.25rem;
 }
@@ -39,8 +41,8 @@
     @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-bold transition
       disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer;
   }
-@utility btn-primary { @apply btn bg-ink text-white hover:bg-lavender-700; }
-@utility btn-pink { @apply btn bg-pink-500 text-white hover:bg-pink-700; }
+@utility btn-primary { @apply btn bg-ink text-white hover:bg-ink-2; }
+@utility btn-pink { @apply btn bg-pink-600 text-white shadow-[0_6px_20px_-6px_rgba(201,64,122,0.6)] hover:bg-pink-700; }
 @utility btn-soft { @apply btn bg-lavender-100 text-lavender-700 hover:bg-lavender; }
 @utility btn-outline { @apply btn border border-line bg-white text-ink hover:bg-lavender-50; }
 @utility btn-danger { @apply btn border border-pink-300 bg-white text-pink-700 hover:bg-pink-50; }
@@ -57,11 +59,33 @@
 @utility notice-info { @apply notice border-lavender-300 bg-lavender-50 text-lavender-700; }
 @utility notice-ok { @apply notice border-[#BFE5CF] bg-[#F0FAF4] text-[#2F7A51]; }
 @utility notice-error { @apply notice border-pink-300 bg-pink-50 text-pink-700; }
+/* LOCKED：金庫の扉のような濃色＋斜めストライプ */
+@utility vault {
+  background-color: var(--color-ink);
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.045) 0 10px, transparent 10px 20px);
+  color: #fff;
+}
+/* UNLOCKED：明るく光る */
+@utility unlocked-glow {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--color-pink-50) 60%, #FFF4F1 100%);
+  box-shadow: 0 0 0 2px var(--color-pink-300), 0 10px 30px -10px rgba(201,64,122,0.45);
+}
 
 @layer components {
   .table th { @apply whitespace-nowrap border-b border-line px-3 py-2 text-left text-xs font-bold text-ink-soft; }
   .table td { @apply border-b border-line px-3 py-2 align-top; }
 }
+
+@keyframes hero-open {
+  0%, 35% { transform: translateY(0) rotate(0); }
+  55% { transform: translateY(-14px) rotate(0); }
+  100% { transform: translateY(-14px) rotate(-32deg); }
+}
+@keyframes hero-flash { 0%, 50% { opacity: 0; transform: scale(.6); } 70% { opacity: 1; } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.hero-shackle { transform-box: fill-box; transform-origin: 90% 100%; animation: hero-open 2.2s .4s cubic-bezier(.5,0,.2,1) both; }
+.hero-flash { transform-box: fill-box; transform-origin: center; animation: hero-flash 2.2s .4s ease-out both; }
+.animate-float { animation: float 4s ease-in-out infinite; }
 
 /* UNLOCK演出：鍵が開き、カードが明るくなり、特典画像が現れる */
 @keyframes unlock-shackle {
@@ -84,5 +108,6 @@
 .animate-unlock { animation: unlock-glow 1.4s ease-out both; }
 .animate-reveal { animation: reveal 0.7s 0.5s ease-out both; }
 @media (prefers-reduced-motion: reduce) {
-  .animate-unlock, .animate-unlock .shackle, .animate-reveal { animation: none; }
+  .animate-unlock, .animate-unlock .shackle, .animate-reveal, .hero-flash, .animate-float { animation: none; }
+  .hero-shackle { animation: none; transform: translateY(-14px) rotate(-32deg); }
 }

@@ -15,7 +15,7 @@ export const metadata = { title: "マイページ" };
 const STATUS_STYLE: Partial<Record<OrderStatus, string>> = {
   applied: "bg-lavender-100 text-lavender-700",
   awaiting_payment: "bg-lavender-100 text-lavender-700",
-  payment_failed: "bg-pink-500 text-white",
+  payment_failed: "bg-pink-600 text-white",
   paid: "bg-[#E3F5EA] text-[#2F7A51]",
 };
 
@@ -74,7 +74,7 @@ export default async function MyPage({ searchParams }: { searchParams: Promise<R
                         <div className="space-y-1">
                           <ProgressBar total={total} targets={o.targets} compact />
                           <p className="flex items-center gap-1 text-[11px] text-ink-soft">
-                            <LockIcon open className="h-3.5 w-3.5 text-pink-500" />
+                            <LockIcon open className="h-3.5 w-3.5 text-pink-600" />
                             {prog.achievedCount}/{prog.count} UNLOCKED・{num(total)}個
                             {prog.next && <>・次まであと<b className="text-pink-700">{num(prog.remaining)}個</b></>}
                           </p>

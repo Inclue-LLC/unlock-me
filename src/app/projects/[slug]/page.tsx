@@ -88,7 +88,7 @@ export default async function ProjectPage({ params }: Props) {
             <div className="flex items-end justify-between">
               <div>
                 <p className="text-xs font-bold text-ink-soft">{final ? "最終申込数量" : "購入申込"}</p>
-                <p className="text-4xl font-black text-pink-700">{num(total)}<span className="ml-1 text-sm text-ink">個</span></p>
+                <p className="text-4xl font-black tabular-nums">{num(total)}<span className="ml-1 text-sm">個</span></p>
               </div>
               <div className="text-right text-xs text-ink-soft">
                 <p>参加者 <b className="text-ink">{num(participants)}</b>人</p>
@@ -98,13 +98,25 @@ export default async function ProjectPage({ params }: Props) {
             <ProgressBar total={total} targets={unlocks.map((u) => u.target_qty)} />
             {p.status === "open" && (
               prog.next ? (
-                <p className="rounded-xl bg-lavender-50 px-4 py-3 text-sm">
-                  <LockIcon open={false} className="mr-1 inline h-4 w-4 text-lavender-500" />
-                  次のUNLOCKまで <b className="text-lg text-pink-700">あと{num(prog.remaining)}個</b>
-                  <span className="block text-xs text-ink-soft">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}：{prog.next.title}</span>
-                </p>
+                <div className="vault relative overflow-hidden rounded-2xl p-4">
+                  <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT UNLOCK</span>
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/10 text-lavender ring-1 ring-white/15">
+                      <LockIcon open={false} className="h-7 w-7" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-black tracking-widest text-lavender">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}</p>
+                      <p className="truncate font-bold text-white">{prog.next.title}</p>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-right text-sm text-white/80">
+                    解放まで <b className="text-3xl font-black tabular-nums text-pink">あと{num(prog.remaining)}</b><span className="text-white">個</span>
+                  </p>
+                </div>
               ) : unlocks.length > 0 ? (
-                <p className="rounded-xl bg-pink-50 px-4 py-3 text-sm font-bold text-pink-700">🎉 すべてのUNLOCKを達成しました！</p>
+                <div className="unlocked-glow flex items-center gap-3 rounded-2xl p-4 font-black text-pink-700">
+                  <LockIcon open className="h-7 w-7" /> すべてのUNLOCKを達成しました！
+                </div>
               ) : null
             )}
             {p.status === "succeeded" && <p className="notice-ok">商品化が成立しました！（最終 {num(total)}個）</p>}
@@ -117,7 +129,7 @@ export default async function ProjectPage({ params }: Props) {
                 <p className="notice-info">お一人様の上限（{p.max_per_user}個）まで申込済みです。</p>
               ) : (
                 <Link href={`/projects/${p.slug}/apply`} className="btn-pink w-full py-4 text-base">
-                  <LockIcon open className="h-5 w-5" /> 購入を申し込む
+                  <LockIcon open className="h-5 w-5" /> 購入を申し込んでUNLOCKに参加
                 </Link>
               )
             ) : null}
@@ -164,7 +176,10 @@ export default async function ProjectPage({ params }: Props) {
           </dl>
         </section>
         <section>
-          <h2 className="section-title"><LockIcon open className="h-5 w-5 text-pink-500" /> UNLOCK条件</h2>
+          <h2 className="section-title">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-pink"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
+            UNLOCK条件<span className="text-sm font-bold text-pink-700">{prog.achievedCount}/{prog.count} 解放</span>
+          </h2>
           {unlocks.length === 0 ? (
             <p className="text-sm text-ink-soft">UNLOCK条件は未設定です。</p>
           ) : (

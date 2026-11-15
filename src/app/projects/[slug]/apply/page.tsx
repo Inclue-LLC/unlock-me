@@ -67,8 +67,8 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
               ) : (
                 <div className="space-y-2">
                   {addresses.map((a) => (
-                    <label key={a.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-500 has-[:checked]:bg-pink-50">
-                      <input type="radio" name="address" value={a.id} defaultChecked={a.id === selectedAddr} required className="mt-1 accent-pink-500" />
+                    <label key={a.id} className="flex cursor-pointer items-start gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-600 has-[:checked]:bg-pink-50">
+                      <input type="radio" name="address" value={a.id} defaultChecked={a.id === selectedAddr} required className="mt-1 accent-pink-600" />
                       <span>{formatAddress(a)}</span>
                     </label>
                   ))}
@@ -84,8 +84,8 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
               ) : (
                 <div className="space-y-2">
                   {pms.map((m) => (
-                    <label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-500 has-[:checked]:bg-pink-50">
-                      <input type="radio" name="pm" value={m.id} defaultChecked={m.id === selectedPm} required className="accent-pink-500" />
+                    <label key={m.id} className="flex cursor-pointer items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-600 has-[:checked]:bg-pink-50">
+                      <input type="radio" name="pm" value={m.id} defaultChecked={m.id === selectedPm} required className="accent-pink-600" />
                       <span>{m.brand} •••• {m.last4}{m.exp_month ? `（有効期限 ${m.exp_month}/${String(m.exp_year).slice(-2)}）` : ""}</span>
                     </label>
                   ))}

@@ -51,8 +51,8 @@ export default async function PaymentMethodsPage({ searchParams }: { searchParam
             <form action={addMockCardAction} className="space-y-3">
               <input type="hidden" name="next" value={next} />
               {Object.entries(MOCK_CARDS).map(([k, c], i) => (
-                <label key={k} className="flex items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-500">
-                  <input type="radio" name="kind" value={k} defaultChecked={i === 0} className="accent-pink-500" />
+                <label key={k} className="flex items-center gap-3 rounded-xl border border-line p-3 text-sm has-[:checked]:border-pink-600">
+                  <input type="radio" name="kind" value={k} defaultChecked={i === 0} className="accent-pink-600" />
                   {c.brand} •••• {c.last4}（{c.label}）
                 </label>
               ))}

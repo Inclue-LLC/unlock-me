@@ -41,7 +41,7 @@ export function ShareButtons({ url, text, image }: { url: string; text: string; 
         {copied ? "コピーしました" : "URLコピー"}
       </button>
       <button type="button" className={cls} onClick={native}>
-        <span className={`${icon} bg-pink-500`}>↗</span>その他
+        <span className={`${icon} bg-pink-600`}>↗</span>その他
       </button>
     </div>
   );

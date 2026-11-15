@@ -92,13 +92,13 @@ export default async function EditProject({ params, searchParams }: { params: Pr
 
       {/* UNLOCK条件 */}
       <section id="unlocks" className="card space-y-4 p-5">
-        <h2 className="section-title"><LockIcon open className="h-5 w-5 text-pink-500" />UNLOCK条件</h2>
+        <h2 className="section-title"><LockIcon open className="h-5 w-5 text-pink-600" />UNLOCK条件</h2>
         <p className="text-xs text-ink-soft">目標数量の昇順で表示されます。最小の目標数量が「商品化（最低成立条件）」、以降が累積の追加特典です。{published && <b className="text-pink-700"> 公開後の変更は例外変更理由が必須で、参加者へ通知されます。</b>}</p>
         {unlocks.map((u, i) => (
           <details key={u.id} className="rounded-2xl border border-line p-4">
             <summary className="flex cursor-pointer flex-wrap items-center gap-2 text-sm">
               <b>UNLOCK {String(i + 1).padStart(2, "0")}</b><span>{num(u.target_qty)}個</span><span>{u.title}</span>
-              <span className={`chip ${u.achieved_at ? "bg-pink-500 text-white" : "bg-lavender-100 text-lavender-700"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
+              <span className={`chip ${u.achieved_at ? "bg-pink-600 text-white" : "bg-lavender-100 text-lavender-700"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
               {u.confirmed !== null && <span className="chip bg-cream">{u.confirmed ? "確定" : "未達確定"}</span>}
               <span className="text-[11px] text-ink-soft">{u.kind === "productization" ? "商品化" : "特典"}</span>
             </summary>
@@ -154,7 +154,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
             <F label="名称"><input name="name" defaultValue={v?.name} required className="input py-2" placeholder={v ? "" : "新規：ピンク / M"} /></F>
             <F label="SKU"><input name="sku" defaultValue={v?.sku} className="input w-32 py-2" /></F>
             <F label="表示順"><input name="sort_order" type="number" defaultValue={v?.sort_order ?? 0} className="input w-20 py-2" /></F>
-            <label className="mb-3 flex items-center gap-1 text-xs"><input type="checkbox" name="is_active" defaultChecked={v?.is_active ?? true} className="accent-pink-500" />受付中</label>
+            <label className="mb-3 flex items-center gap-1 text-xs"><input type="checkbox" name="is_active" defaultChecked={v?.is_active ?? true} className="accent-pink-600" />受付中</label>
             <SubmitButton className={v ? "btn-outline btn-sm" : "btn-primary btn-sm"}>{v ? "更新" : "追加"}</SubmitButton>
           </form>
         ))}

@@ -87,14 +87,14 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
       {/* UNLOCK状況 */}
       <div className="card p-5">
-        <h2 className="section-title text-base"><LockIcon open className="h-5 w-5 text-pink-500" />UNLOCK状況</h2>
+        <h2 className="section-title text-base"><LockIcon open className="h-5 w-5 text-pink-600" />UNLOCK状況</h2>
         <p className="mb-3 text-sm">{o.final_qty !== null ? "最終" : "現在"} <b className="text-pink-700">{num(total)}個</b>・{prog.achievedCount}/{prog.count} UNLOCKED{prog.next && status === "applied" ? `・次まであと${num(prog.remaining)}個` : ""}</p>
         <ul className="space-y-2 text-sm">
           {unlocks.map((u, i) => {
             const open = o.final_qty !== null ? u.confirmed === true : u.achieved_at !== null;
             return (
               <li key={u.id} className="flex items-center gap-2">
-                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-500" : "text-lavender-300"}`} />
+                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-600" : "text-lavender-300"}`} />
                 <span className="text-xs text-ink-soft">{String(i + 1).padStart(2, "0")} / {num(u.target_qty)}個</span>
                 <span className={open ? "font-bold" : "text-ink-soft"}>{u.title}</span>
               </li>
@@ -156,8 +156,8 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
           <form action={changeOrderAddressAction} className="mt-3 space-y-2">
             <input type="hidden" name="id" value={o.id} />
             {addresses.map((a) => (
-              <label key={a.id} className="flex items-start gap-2 rounded-xl border border-line p-3 text-xs has-[:checked]:border-pink-500">
-                <input type="radio" name="address" value={a.id} defaultChecked={Number(o.address_id) === a.id} className="mt-0.5 accent-pink-500" />
+              <label key={a.id} className="flex items-start gap-2 rounded-xl border border-line p-3 text-xs has-[:checked]:border-pink-600">
+                <input type="radio" name="address" value={a.id} defaultChecked={Number(o.address_id) === a.id} className="mt-0.5 accent-pink-600" />
                 {formatAddress(a)}
               </label>
             ))}

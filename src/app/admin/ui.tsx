@@ -12,14 +12,14 @@ export function PageTitle({ children, action }: { children: React.ReactNode; act
 
 const PCOLOR: Record<ProjectStatus, string> = {
   draft: "bg-white border border-line text-ink-soft", scheduled: "bg-lavender-100 text-lavender-700", open: "bg-ink text-white",
-  judging: "bg-pink-50 text-pink-700", succeeded: "bg-[#E3F5EA] text-[#2F7A51]", failed: "bg-pink-50 text-pink-700", suspended: "bg-pink-500 text-white",
+  judging: "bg-pink-50 text-pink-700", succeeded: "bg-[#E3F5EA] text-[#2F7A51]", failed: "bg-pink-50 text-pink-700", suspended: "bg-pink-600 text-white",
 };
 export function ProjectStatusChip({ s }: { s: ProjectStatus }) {
   return <span className={`chip ${PCOLOR[s]}`}>{PROJECT_STATUS_LABEL[s]}</span>;
 }
 
 const OCOLOR: Partial<Record<OrderStatus, string>> = {
-  applied: "bg-lavender-100 text-lavender-700", awaiting_payment: "bg-lavender-100 text-lavender-700", payment_failed: "bg-pink-500 text-white",
+  applied: "bg-lavender-100 text-lavender-700", awaiting_payment: "bg-lavender-100 text-lavender-700", payment_failed: "bg-pink-600 text-white",
   paid: "bg-[#E3F5EA] text-[#2F7A51]",
 };
 export function OrderStatusChip({ s }: { s: OrderStatus }) {

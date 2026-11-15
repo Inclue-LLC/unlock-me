@@ -65,7 +65,7 @@ export default async function ConfirmPage({ params, searchParams }: { params: Pr
             <p>・{p.allow_cancel ? "募集期間中はマイページからキャンセルできます。募集終了後のキャンセルはできません。" : "申込後のキャンセルはお受けできません。"}</p>
             <p>・特典は募集終了時点の達成状況で確定します。</p>
             <label className="mt-3 flex items-start gap-2 text-sm text-ink">
-              <input type="checkbox" name="agree" required className="mt-1 accent-pink-500" />
+              <input type="checkbox" name="agree" required className="mt-1 accent-pink-600" />
               <span>上記内容・<Link href="/terms" target="_blank" className="underline">利用規約</Link>に同意して申し込みます</span>
             </label>
           </div>
