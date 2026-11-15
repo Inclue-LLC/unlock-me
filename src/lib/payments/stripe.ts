@@ -16,7 +16,7 @@ export async function createSetupIntent(customerId: string) {
   const si = await stripe().setupIntents.create({
     customer: customerId,
     usage: "off_session",
-    payment_method_types: ["card"],
+    allowed_payment_method_types: ["card"],
   });
   return si.client_secret!;
 }

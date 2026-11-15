@@ -31,7 +31,7 @@ export async function createSession(userId: number) {
   jar.set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: (process.env.APP_URL ?? "").startsWith("https://"),
     path: "/",
     expires,
   });

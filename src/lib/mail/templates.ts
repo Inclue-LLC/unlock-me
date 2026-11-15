@@ -190,6 +190,22 @@ ${FOOTER}`,
 ${FOOTER}`,
   },
   {
+    key: "condition_changed",
+    name: "UNLOCK条件・募集条件の変更",
+    subject: "【UNLOCK ME】ご参加中のプロジェクトの条件が変更されました「{{projectTitle}}」",
+    body: `{{name}} 様
+
+ご参加中の「{{projectTitle}}」のUNLOCK条件（または募集条件）が変更されました。
+変更理由：{{reason}}
+
+最新の内容は以下のページでご確認ください。
+変更内容にご納得いただけない場合は、マイページからキャンセル（募集期間中・キャンセル可能なプロジェクトのみ）
+またはお問い合わせください。
+
+{{projectUrl}}
+${FOOTER}`,
+  },
+  {
     key: "shipped",
     name: "発送完了",
     subject: "【UNLOCK ME】商品を発送しました（{{orderNumber}}）",

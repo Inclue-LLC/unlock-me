@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* POP BASE ブランドガイド準拠（近似値。正式値がある場合は差し替え） */
+@theme {
+  --color-lavender: #DCCEF5;
+  --color-lavender-50: #F6F1FD;
+  --color-lavender-100: #EDE5FA;
+  --color-lavender-300: #C5B2EE;
+  --color-lavender-500: #9C83D6;
+  --color-lavender-700: #6A55A8;
+  --color-pink: #F7C9D8;
+  --color-pink-50: #FDF2F6;
+  --color-pink-300: #F1A9C1;
+  --color-pink-500: #E57FA2;
+  --color-pink-700: #B9567A;
+  --color-cream: #FFF4F1;
+  --color-ink: #3D3550;
+  --color-ink-soft: #6F6782;
+  --color-line: #ECE4F3;
+  --font-sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    letter-spacing: 0.02em;
+  }
+  a { color: inherit; }
+  h1, h2, h3 { letter-spacing: 0.04em; }
+}
+
+@utility container-app { @apply mx-auto w-full max-w-5xl px-4; }
+@utility card { @apply rounded-[var(--radius-card)] bg-white shadow-[0_2px_16px_rgba(106,85,168,0.07)] border border-line; }
+@utility btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-bold transition
+      disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer;
+  }
+@utility btn-primary { @apply btn bg-ink text-white hover:bg-lavender-700; }
+@utility btn-pink { @apply btn bg-pink-500 text-white hover:bg-pink-700; }
+@utility btn-soft { @apply btn bg-lavender-100 text-lavender-700 hover:bg-lavender; }
+@utility btn-outline { @apply btn border border-line bg-white text-ink hover:bg-lavender-50; }
+@utility btn-danger { @apply btn border border-pink-300 bg-white text-pink-700 hover:bg-pink-50; }
+@utility btn-sm { @apply px-4 py-2 text-xs; }
+@utility label { @apply mb-1 block text-xs font-bold text-ink-soft; }
+@utility input {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition
+      focus:border-lavender-500 focus:ring-4 focus:ring-lavender-100;
+  }
+@utility chip { @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-bold; }
+@utility section-title { @apply mb-4 flex items-center gap-2 text-lg font-bold; }
+@utility table { @apply w-full text-sm; }
+@utility notice { @apply rounded-2xl border px-4 py-3 text-sm; }
+@utility notice-info { @apply notice border-lavender-300 bg-lavender-50 text-lavender-700; }
+@utility notice-ok { @apply notice border-[#BFE5CF] bg-[#F0FAF4] text-[#2F7A51]; }
+@utility notice-error { @apply notice border-pink-300 bg-pink-50 text-pink-700; }
+
+@layer components {
+  .table th { @apply whitespace-nowrap border-b border-line px-3 py-2 text-left text-xs font-bold text-ink-soft; }
+  .table td { @apply border-b border-line px-3 py-2 align-top; }
+}
+
+/* UNLOCK演出：鍵が開き、カードが明るくなり、特典画像が現れる */
+@keyframes unlock-shackle {
+  0% { transform: translateY(0) rotate(0); }
+  40% { transform: translateY(-3px) rotate(0); }
+  100% { transform: translateY(-3px) rotate(-28deg); }
+}
+@keyframes unlock-glow {
+  0% { box-shadow: 0 0 0 0 rgba(229,127,162,0.0); filter: saturate(0.6) brightness(0.96); }
+  50% { box-shadow: 0 0 0 10px rgba(229,127,162,0.18); }
+  100% { box-shadow: 0 0 0 0 rgba(229,127,162,0.0); filter: none; }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: scale(0.9) translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.shackle { transform-box: fill-box; transform-origin: 85% 100%; }
+.is-open .shackle { transform: translateY(-3px) rotate(-28deg); }
+.animate-unlock .shackle { animation: unlock-shackle 0.9s ease-out both; }
+.animate-unlock { animation: unlock-glow 1.4s ease-out both; }
+.animate-reveal { animation: reveal 0.7s 0.5s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-unlock, .animate-unlock .shackle, .animate-reveal { animation: none; }
+}

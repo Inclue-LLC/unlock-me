@@ -15,6 +15,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^7.10.0",
     "bcryptjs": "^3.0.3",
     "next": "^15.5.29",
     "nodemailer": "^8.0.0",
