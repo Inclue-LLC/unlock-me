@@ -14,7 +14,7 @@ export function ProgressBar({ total, targets, compact = false }: { total: number
   if (compact) {
     return (
       <div className="relative h-2 w-full rounded-full bg-lavender-100" role="progressbar" aria-valuemin={0} aria-valuemax={max} aria-valuenow={total}>
-        <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-lavender-500 to-pink-600" style={{ width: `${pct}%` }} />
+        <div className="absolute inset-y-0 left-0 rounded-full bg-pink-600" style={{ width: `${pct}%` }} />
         {sorted.map((t) => (
           <span key={t} className={`absolute top-1/2 h-3 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full ${t <= total ? "bg-pink-600" : "bg-lavender-500"}`} style={{ left: pos(t) }} />
         ))}

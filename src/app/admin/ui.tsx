@@ -11,7 +11,7 @@ export function PageTitle({ children, action }: { children: React.ReactNode; act
 }
 
 const PCOLOR: Record<ProjectStatus, string> = {
-  draft: "bg-white border border-line text-ink-soft", scheduled: "bg-lavender-100 text-lavender-700", open: "bg-ink text-white",
+  draft: "bg-white border border-line text-ink-soft", scheduled: "bg-lavender-100 text-lavender-700", open: "bg-violet text-white",
   judging: "bg-pink-50 text-pink-700", succeeded: "bg-[#E3F5EA] text-[#2F7A51]", failed: "bg-pink-50 text-pink-700", suspended: "bg-pink-600 text-white",
 };
 export function ProjectStatusChip({ s }: { s: ProjectStatus }) {

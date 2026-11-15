@@ -3,7 +3,7 @@ import { Logo } from "./LockIcon";
 
 export function Footer() {
   return (
-    <footer className="mt-16 border-t border-line bg-white/60 py-10 text-xs text-ink-soft">
+    <footer className="mt-16 border-t border-line bg-white py-10 text-xs text-ink-soft">
       <div className="container-app space-y-4">
         <Logo className="text-sm text-ink" />
         <p>「みんなで、欲しいものを解放する。」</p>

@@ -96,7 +96,7 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
             {!final ? (
               <div className="mt-3">
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/60">
-                  <div className="h-full rounded-full bg-gradient-to-r from-lavender-500 to-pink-600" style={{ width: `${segPct}%` }} />
+                  <div className="h-full rounded-full bg-pink-600" style={{ width: `${segPct}%` }} />
                 </div>
                 <p className="mt-1.5 text-right text-xs text-ink-soft">
                   UNLOCKまで <b className={`tabular-nums ${isNext ? "text-base text-pink-700" : "text-ink"}`}>あと{n(u.target_qty - total)}個</b>

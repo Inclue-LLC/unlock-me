@@ -101,46 +101,46 @@ async function main() {
 
   // 仕様書の例：ぬいぐるみプロジェクト（420個 / 300・500・1,000）
   const plush = await project(sellerId, {
-    slug: "fluffy-bear-plush", title: "ふわもこベア ぬいぐるみ（全2色）", category: "ぬいぐるみ", price: 4800, image: "/demo/plush.svg",
-    images: ["/demo/charm.svg", "/demo/mini.svg"], startsIn: -10 * DAY, endsIn: 12 * DAY, featured: true, sort: 1,
+    slug: "fluffy-bear-plush", title: "ふわもこベア ぬいぐるみ（全2色）", category: "ぬいぐるみ", price: 4800, image: "/demo/plush.jpg",
+    images: ["/demo/plush-lavender.jpg", "/demo/mini.jpg", "/demo/charm.jpg"], startsIn: -10 * DAY, endsIn: 12 * DAY, featured: true, sort: 1,
     variants: ["ミルクホワイト", "ラベンダー"], ship: "2027年3月下旬発送予定",
     description: "ふわふわもこもこの手ざわりにこだわった、高さ約25cmのぬいぐるみ。\nPOP BASEの人気キャラクター「ふわもこベア」が、みんなの申込で商品化を目指します。\n\n・サイズ：約W20×H25×D15cm\n・素材：ポリエステル",
     unlocks: [
       [300, "ぬいぐるみ商品化決定", "申込数量300個で商品化が決定します。"],
-      [500, "限定チャームをプレゼント", "ふわもこベアのアクリルチャーム（約4cm）を全員にプレゼント。", "/demo/charm.svg"],
-      [1000, "限定ミニぬいぐるみをプレゼント", "手のひらサイズのミニぬいぐるみ（約8cm）を全員にプレゼント。", "/demo/mini.svg"],
+      [500, "限定チャームをプレゼント", "ふわもこベアのアクリルチャーム（約4cm）を全員にプレゼント。", "/demo/charm.jpg"],
+      [1000, "限定ミニぬいぐるみをプレゼント", "手のひらサイズのミニぬいぐるみ（約8cm）を全員にプレゼント。", "/demo/mini.jpg"],
     ],
   });
   const plushVariants = (await query("SELECT id FROM variants WHERE project_id=$1 ORDER BY sort_order", [plush])).map((v) => Number(v.id));
   await fill(plush, 418, buyers.slice(1), plushVariants); // デモ会員の2個と合わせて420個
 
   const acrylic = await project(sellerId, {
-    slug: "acrylic-stand-party", title: "パーティーアクリルスタンド", category: "アクリル", price: 1800, image: "/demo/acrylic.svg",
+    slug: "acrylic-stand-party", title: "パーティーアクリルスタンド", category: "アクリル", price: 1800, image: "/demo/acrylic.jpg",
     startsIn: -5 * DAY, endsIn: 20 * HOUR, featured: true, sort: 2, ship: "2027年2月中旬発送予定",
     description: "みんなでパーティー！なアクリルスタンド。台座付き、高さ約15cm。",
-    unlocks: [[100, "アクリルスタンド商品化決定", ""], [200, "限定ステッカーをプレゼント", "ステッカー5枚セット", "/demo/sticker.svg"], [400, "背景パネルを追加", "飾れる背景パネルが付属"]],
+    unlocks: [[100, "アクリルスタンド商品化決定", ""], [200, "限定ステッカーをプレゼント", "ステッカー5枚セット", "/demo/sticker.jpg"], [400, "背景パネルを追加", "飾れる背景パネルが付属"]],
   });
   await fill(acrylic, 186, buyers.slice(1));
 
   const tote = await project(sellerId, {
-    slug: "canvas-tote-bag", title: "まいにちキャンバストート", category: "バッグ", price: 3200, image: "/demo/tote.svg",
+    slug: "canvas-tote-bag", title: "まいにちキャンバストート", category: "バッグ", price: 3200, image: "/demo/tote.jpg",
     startsIn: -2 * DAY, endsIn: 25 * DAY, sort: 3, variants: ["ナチュラル", "ピンク"], ship: "2027年4月上旬発送予定",
     description: "A4がすっぽり入る、厚手のキャンバストート。",
-    unlocks: [[150, "トートバッグ商品化決定", ""], [300, "限定キーホルダーをプレゼント", "", "/demo/keyholder.svg"]],
+    unlocks: [[150, "トートバッグ商品化決定", ""], [300, "限定キーホルダーをプレゼント", "", "/demo/keyholder.jpg"]],
     rewardUnit: "per_item",
   });
   const toteVariants = (await query("SELECT id FROM variants WHERE project_id=$1 ORDER BY sort_order", [tote])).map((v) => Number(v.id));
   await fill(tote, 42, buyers.slice(1), toteVariants);
 
   await project(sellerId, {
-    slug: "morning-mug", title: "おはようマグカップ", category: "雑貨", price: 2400, image: "/demo/mug.svg",
+    slug: "morning-mug", title: "おはようマグカップ", category: "雑貨", price: 2400, image: "/demo/mug.jpg",
     startsIn: 3 * DAY, endsIn: 30 * DAY, sort: 4, ship: "2027年5月発送予定", status: "scheduled",
     description: "朝が楽しみになるマグカップ。容量約350ml。",
     unlocks: [[200, "マグカップ商品化決定", ""], [400, "コースターをプレゼント", ""]],
   });
 
   await project(sellerId, {
-    slug: "sticker-collection", title: "ステッカーコレクション", category: "ステーショナリー", price: 800, image: "/demo/sticker.svg",
+    slug: "sticker-collection", title: "ステッカーコレクション", category: "ステーショナリー", price: 800, image: "/demo/sticker.jpg",
     startsIn: -1 * DAY, endsIn: 14 * DAY, sort: 5, ship: "2027年1月下旬発送予定",
     description: "耐水ステッカー10枚セット。",
     unlocks: [[50, "ステッカー商品化決定", ""], [120, "ホログラム仕様にアップグレード", ""], [250, "限定デザイン2枚追加", ""]],
@@ -150,7 +150,7 @@ async function main() {
 
   // 成立済みプロジェクト（決済失敗を1件含む）
   const done = await project(sellerId, {
-    slug: "pastel-keyholder", title: "パステルキーホルダー", category: "アクセサリー", price: 1200, image: "/demo/keyholder.svg",
+    slug: "pastel-keyholder", title: "パステルキーホルダー", category: "アクセサリー", price: 1200, image: "/demo/keyholder.jpg",
     startsIn: -30 * DAY, endsIn: 1 * DAY, ship: "2027年1月中旬発送予定",
     description: "パステルカラーのラバーキーホルダー。",
     unlocks: [[30, "キーホルダー商品化決定", ""], [60, "限定ステッカーをプレゼント", ""], [120, "ミニポーチをプレゼント", ""]],

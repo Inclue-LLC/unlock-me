@@ -5,7 +5,7 @@ import { Logo } from "./LockIcon";
 export async function Header() {
   const user = await getCurrentUser();
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-cream/90 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-line bg-white/85 backdrop-blur">
       <div className="container-app flex h-14 items-center justify-between">
         <Link href="/" aria-label="UNLOCK ME トップ">
           <Logo className="text-base" />

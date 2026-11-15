@@ -20,12 +20,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const empty = data.every((d) => d.length === 0);
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-lavender via-lavender-50 to-pink">
-        <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-white/50 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-pink/70 blur-3xl" />
+      <section className="relative overflow-hidden bg-lavender-50">
         <div className="container-app relative grid items-center gap-6 py-12 sm:grid-cols-[1.3fr_1fr] sm:py-16">
           <div>
-            <p className="chip mb-4 bg-white/70 text-lavender-700"><LockIcon open className="h-3.5 w-3.5" /> UNLOCK · SHARE · CREATE</p>
+            <p className="chip mb-4 bg-white text-lavender-700 shadow-sm"><LockIcon open className="h-3.5 w-3.5" /> UNLOCK · SHARE · CREATE</p>
             <h1 className="text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
               みんなで、<br />
               <span className="whitespace-nowrap">欲しいものを</span>

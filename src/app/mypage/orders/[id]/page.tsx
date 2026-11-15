@@ -66,7 +66,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
       <div className="card p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="chip bg-ink text-white">{ORDER_STATUS_LABEL[status]}</span>
+          <span className="chip bg-violet text-white">{ORDER_STATUS_LABEL[status]}</span>
           {o.fulfillment_status !== "none" && <span className="chip bg-cream">{FULFILLMENT_LABEL[o.fulfillment_status]}</span>}
           <span className="text-xs text-ink-soft">申込番号 {o.number}</span>
         </div>
