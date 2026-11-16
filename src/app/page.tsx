@@ -117,25 +117,23 @@ function Spotlight({ p }: { p: ProjectCardData }) {
     <section>
       <p className="eyebrow flex items-center gap-1.5"><LockIcon open={false} className="h-3.5 w-3.5" />Spotlight</p>
       <h2 className="mb-4 mt-1 text-xl font-bold sm:text-2xl">いま注目のプロジェクト</h2>
-      <div className="grid gap-5 md:grid-cols-[1.1fr_1fr] md:gap-8">
-        <Link href={`/projects/${p.slug}`} className="card relative block self-start overflow-hidden">
-          <ProjectImage src={p.main_image} alt={p.title} className="aspect-square w-full object-cover transition duration-500 hover:scale-105" />
+      {/* 画像と情報を1枚のカードにまとめる */}
+      <div className="card grid overflow-hidden md:grid-cols-[1.05fr_1fr]">
+        <Link href={`/projects/${p.slug}`} className="relative block overflow-hidden bg-mist">
+          <ProjectImage src={p.main_image} alt={p.title} className="aspect-square h-full w-full object-cover transition duration-500 hover:scale-105" />
           {(achieved > 0 || p.status === "succeeded") && <span className="absolute left-4 top-4"><ProductizedBadge size="lg" /></span>}
         </Link>
-        <div className="space-y-5">
-          <div>
-            <span className={`chip mb-2 ${open ? "bg-ink text-white" : "border border-line bg-white text-ink-soft"}`}>{open ? "募集中" : "募集終了"}</span>
-            <h3 className="text-2xl font-bold leading-snug sm:text-3xl">
-              <Link href={`/projects/${p.slug}`} className="hover:underline">{p.title}</Link>
-            </h3>
-            <p className="mt-3 font-latin text-3xl font-semibold tabular-nums">{yen(p.price)}<span className="ml-1 font-sans text-sm font-medium text-ink-soft">税込</span></p>
-          </div>
-          <div className="card space-y-4 p-5">
-            <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} open={open} endsAt={p.ends_at} />
-            <Link href={`/projects/${p.slug}`} className="btn-cta w-full py-4 text-base">
-              <LockIcon open className="h-5 w-5" /> 詳しく見て申し込む
-            </Link>
-          </div>
+        <div className="flex flex-col p-5 sm:p-7">
+          <span className={`chip mb-2 self-start ${open ? "bg-ink text-white" : "border border-line bg-white text-ink-soft"}`}>{open ? "募集中" : "募集終了"}</span>
+          <h3 className="text-2xl font-bold leading-snug sm:text-3xl">
+            <Link href={`/projects/${p.slug}`} className="hover:underline">{p.title}</Link>
+          </h3>
+          <p className="mt-3 font-latin text-3xl font-semibold tabular-nums">{yen(p.price)}<span className="ml-1 font-sans text-sm font-medium text-ink-soft">税込</span></p>
+          <div className="my-5 border-t border-line" />
+          <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} open={open} endsAt={p.ends_at} />
+          <Link href={`/projects/${p.slug}`} className="btn-cta mt-5 w-full py-4 text-base md:mt-auto">
+            <LockIcon open className="h-5 w-5" /> 詳しく見て申し込む
+          </Link>
         </div>
       </div>
     </section>
