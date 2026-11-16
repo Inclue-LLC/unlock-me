@@ -3,6 +3,10 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { HeroLock, LockIcon } from "@/components/LockIcon";
 import { listSection, type Section } from "@/lib/projects";
 import { Flash } from "@/components/Flash";
+import { ProjectImage } from "@/components/ProjectImage";
+import { ProjectProgress } from "@/components/ProjectProgress";
+import type { ProjectCardData } from "@/lib/projects";
+import { yen } from "@/lib/util";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +22,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
   const sp = await searchParams;
   const data = await Promise.all(SECTIONS.map((s) => listSection(s.key)));
   const empty = data.every((d) => d.length === 0);
+  // 注目プロジェクト：おすすめの先頭を商品ページと同じレイアウトで大きく見せる
+  const spotlight = data[0][0] ?? data[1][0] ?? data[3][0] ?? null;
+  if (spotlight) data[0] = data[0].filter((p) => p.id !== spotlight.id);
   return (
     <>
       <section className="relative overflow-hidden bg-[linear-gradient(160deg,#F2ECFA,#FBEAF0_60%,#FFFAF8)]">
@@ -48,6 +55,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
       <div className="container-app space-y-14 py-12">
         {(sp.ok || sp.error) && <div><Flash ok={sp.ok} error={sp.error} /></div>}
         {empty && <p className="card p-8 text-center text-sm text-ink-soft">現在募集中のプロジェクトはありません。</p>}
+        {spotlight && <Spotlight p={spotlight} />}
         {SECTIONS.map((s, i) =>
           data[i].length ? (
             <section key={s.key}>
@@ -95,6 +103,39 @@ function HowItWorks() {
           </li>
         ))}
       </ol>
+    </section>
+  );
+}
+
+/** 注目プロジェクト：商品ページと同じ「画像＋商品名・値段＋進捗カード」の構成 */
+function Spotlight({ p }: { p: ProjectCardData }) {
+  const final = p.final_qty !== null;
+  const total = final ? p.final_qty! : p.total_qty;
+  const open = p.status === "open";
+  return (
+    <section>
+      <p className="eyebrow flex items-center gap-1.5"><LockIcon open={false} className="h-3.5 w-3.5" />Spotlight</p>
+      <h2 className="mb-4 mt-1 text-xl font-bold sm:text-2xl">いま注目のプロジェクト</h2>
+      <div className="grid gap-5 md:grid-cols-[1.1fr_1fr] md:gap-8">
+        <Link href={`/projects/${p.slug}`} className="card block self-start overflow-hidden">
+          <ProjectImage src={p.main_image} alt={p.title} className="aspect-square w-full object-cover transition duration-500 hover:scale-105" />
+        </Link>
+        <div className="space-y-5">
+          <div>
+            <span className={`chip mb-2 ${open ? "bg-ink text-white" : "border border-line bg-white text-ink-soft"}`}>{open ? "募集中" : "募集終了"}</span>
+            <h3 className="text-2xl font-bold leading-snug sm:text-3xl">
+              <Link href={`/projects/${p.slug}`} className="hover:underline">{p.title}</Link>
+            </h3>
+            <p className="mt-3 font-latin text-3xl font-semibold tabular-nums">{yen(p.price)}<span className="ml-1 font-sans text-sm font-medium text-ink-soft">税込</span></p>
+          </div>
+          <div className="card space-y-4 p-5">
+            <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} open={open} endsAt={p.ends_at} />
+            <Link href={`/projects/${p.slug}`} className="btn-cta w-full py-4 text-base">
+              <LockIcon open className="h-5 w-5" /> 詳しく見て申し込む
+            </Link>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

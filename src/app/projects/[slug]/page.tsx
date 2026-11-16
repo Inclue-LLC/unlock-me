@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Countdown } from "@/components/Countdown";
 import { LockIcon } from "@/components/LockIcon";
-import { ProgressBar } from "@/components/ProgressBar";
+import { ProjectProgress } from "@/components/ProjectProgress";
 import { ProjectImage } from "@/components/ProjectImage";
 import { ShareButtons } from "@/components/ShareButtons";
 import { UnlockList } from "@/components/UnlockList";
@@ -84,40 +83,10 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           <div className="card space-y-4 p-5">
-            <div className="flex items-end justify-between">
-              <div>
-                <p className="text-sm font-bold text-ink-soft">{final ? "最終申込数" : "申込数"}</p>
-                <p className="font-latin text-4xl font-semibold tabular-nums">{num(total)}<span className="ml-1 font-sans text-base font-bold">個</span></p>
-              </div>
-              <div className="text-right text-xs text-ink-soft">
-                <p>参加者 <b className="text-ink">{num(participants)}</b>人</p>
-                {p.status === "open" && <p className="mt-1">残り <b className="text-base text-ink"><Countdown endsAt={p.ends_at.toISOString()} /></b></p>}
-              </div>
-            </div>
-            <ProgressBar total={total} targets={unlocks.map((u) => u.target_qty)} />
-            {p.status === "open" && (
-              prog.next ? (
-                <div className="vault relative overflow-hidden rounded-2xl p-4">
-                  <span className="absolute right-0 top-0 rounded-bl-xl badge-new px-3 py-1 font-latin text-[10px] font-semibold tracking-widest">NEXT UNLOCK</span>
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-ink-soft ring-1 ring-white">
-                      <LockIcon open={false} className="h-7 w-7" />
-                    </span>
-                    <div className="min-w-0">
-                      <p className="text-[11px] font-black tracking-widest text-ink-soft">UNLOCK {String(prog.achievedCount + 1).padStart(2, "0")}</p>
-                      <p className="truncate font-bold">{prog.next.title}</p>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-right text-sm text-ink-soft">
-                    解放まで <b className="text-3xl font-black tabular-nums text-pink-700">あと{num(prog.remaining)}</b><span className="text-ink">個</span>
-                  </p>
-                </div>
-              ) : unlocks.length > 0 ? (
-                <div className="unlocked-glow flex items-center gap-3 rounded-2xl p-4 font-black text-pink-700">
-                  <LockIcon open className="h-7 w-7" /> すべてのUNLOCKを達成しました！
-                </div>
-              ) : null
-            )}
+            <ProjectProgress
+              total={total} final={final} targets={unlocks.map((u) => u.target_qty)} titles={unlocks.map((u) => u.title)}
+              open={p.status === "open"} endsAt={p.ends_at} participants={participants}
+            />
             {p.status === "succeeded" && <p className="notice-ok">商品化が成立しました！（最終 {num(total)}個）</p>}
             {p.status === "failed" && <p className="notice-error">目標数量に届かず、不成立となりました。申込は取り消され、代金は請求されません。</p>}
             {p.status === "judging" && <p className="notice-info">募集は終了しました。現在、成立判定を行っています。</p>}
