@@ -81,25 +81,25 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
 }
 
 function HowItWorks() {
-  const steps: [string, string, boolean][] = [
-    ["見つける", "気になるキャラクター・クリエイターの商品を探す", false],
-    ["申し込む", "購入を申込。決済は商品化が成立してから", false],
-    ["シェアする", "SNSで共有して参加者を増やす", false],
-    ["UNLOCK!", "目標達成で商品化決定、さらに特典が解放", true],
-    ["届く", "みんなで実現した商品がお手元に", true],
+  const steps: [string, string][] = [
+    ["見つける", "気になるキャラクター・クリエイターの商品を探す"],
+    ["申し込む", "購入を申込。決済は商品化が成立してから"],
+    ["シェアする", "SNSで共有して参加者を増やす"],
+    ["UNLOCK!", "目標達成で商品化決定、さらに特典が解放"],
+    ["届く", "みんなで実現した商品がお手元に"],
   ];
   return (
     <section className="card p-6 sm:p-8">
       <p className="eyebrow">How it works</p>
       <h2 className="mb-5 mt-1 text-xl font-bold sm:text-2xl">UNLOCK MEのしくみ</h2>
       <ol className="grid gap-3 sm:grid-cols-5">
-        {steps.map(([t, d, open], i) => (
-          <li key={t} className={`rounded-2xl p-4 ${open ? "unlocked-glow" : "vault"}`}>
-            <span className={`flex items-center gap-1.5 font-latin text-[11px] font-semibold tracking-[0.12em] ${open ? "text-pink-700" : "text-ink-soft"}`}>
-              <LockIcon open={open} className="h-4 w-4" /> STEP {i + 1}
+        {steps.map(([t, d], i) => (
+          <li key={t} className="unlocked-glow rounded-2xl p-4">
+            <span className="flex items-center gap-1.5 font-latin text-[11px] font-semibold tracking-[0.12em] text-pink-700">
+              <LockIcon open className="h-4 w-4" /> STEP {i + 1}
             </span>
             <p className="mt-1 font-bold">{t}</p>
-            <p className={`mt-1 text-xs text-ink-soft`}>{d}</p>
+            <p className="mt-1 text-xs text-ink-soft">{d}</p>
           </li>
         ))}
       </ol>
