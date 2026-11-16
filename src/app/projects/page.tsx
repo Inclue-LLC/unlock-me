@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
       {list.length === 0 ? (
         <p className="card p-8 text-center text-sm text-ink-soft">現在募集中のプロジェクトはありません。</p>
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((p) => <ProjectCard key={p.id} p={p} />)}
         </div>
       )}

@@ -5,12 +5,14 @@ import { normalizeUnlock } from "./unlock";
 export interface ProjectCardData extends Project {
   targets: number[];
   unlock_titles: string[];
+  unlock_images: string[];
 }
 
 const CARD_SELECT = `
   SELECT p.*, s.name AS seller_name,
          COALESCE(ARRAY(SELECT target_qty FROM unlocks u WHERE u.project_id=p.id ORDER BY target_qty), '{}') AS targets,
-         COALESCE(ARRAY(SELECT title FROM unlocks u WHERE u.project_id=p.id ORDER BY target_qty), '{}') AS unlock_titles
+         COALESCE(ARRAY(SELECT title FROM unlocks u WHERE u.project_id=p.id ORDER BY target_qty), '{}') AS unlock_titles,
+         COALESCE(ARRAY(SELECT image FROM unlocks u WHERE u.project_id=p.id ORDER BY target_qty), '{}') AS unlock_images
     FROM projects p LEFT JOIN sellers s ON s.id = p.seller_id`;
 
 function norm<T extends { id: unknown; seller_id?: unknown }>(p: T): T {

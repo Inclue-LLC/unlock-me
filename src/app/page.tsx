@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
 import { HeroLock, LockIcon, ProductizedBadge } from "@/components/LockIcon";
-import { listSection, type Section } from "@/lib/projects";
+import { listAllOpen, listSection } from "@/lib/projects";
 import { Flash } from "@/components/Flash";
 import { ProjectImage } from "@/components/ProjectImage";
 import { ProjectProgress } from "@/components/ProjectProgress";
@@ -10,21 +10,16 @@ import { yen } from "@/lib/util";
 
 export const dynamic = "force-dynamic";
 
-const SECTIONS: { key: Section; title: string; sub: string }[] = [
-  { key: "featured", title: "おすすめ", sub: "PICK UP" },
-  { key: "soon", title: "もうすぐUNLOCK", sub: "ALMOST THERE" },
-  { key: "ending", title: "募集終了間近", sub: "LAST CHANCE" },
-  { key: "new", title: "新着", sub: "NEW" },
-  { key: "unlocked", title: "UNLOCK達成済み", sub: "UNLOCKED" },
-];
-
 export default async function Home({ searchParams }: { searchParams: Promise<Record<string, string>> }) {
   const sp = await searchParams;
-  const data = await Promise.all(SECTIONS.map((s) => listSection(s.key)));
-  const empty = data.every((d) => d.length === 0);
-  // 注目プロジェクト：おすすめの先頭を商品ページと同じレイアウトで大きく見せる
-  const spotlight = data[0][0] ?? data[1][0] ?? data[3][0] ?? null;
-  if (spotlight) data[0] = data[0].filter((p) => p.id !== spotlight.id);
+  // トップは「注目のプロジェクト」「もうすぐUNLOCK」「すべてのプロジェクト」の3つだけ
+  const [featured, soon, all] = await Promise.all([listSection("featured", 1), listSection("soon", 6), listAllOpen()]);
+  const spotlight = featured[0] ?? soon[0] ?? all[0] ?? null;
+  const sections: { key: string; title: string; sub: string; items: ProjectCardData[]; more?: boolean }[] = [
+    { key: "soon", title: "もうすぐUNLOCK", sub: "Almost there", items: soon.filter((p) => p.id !== spotlight?.id) },
+    { key: "all", title: "すべてのプロジェクト", sub: "All projects", items: all, more: true },
+  ];
+  const empty = all.length === 0;
   return (
     <>
       <section className="relative overflow-hidden bg-[linear-gradient(160deg,#F2ECFA,#FBEAF0_60%,#FFFAF8)]">
@@ -56,20 +51,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<Rec
         {(sp.ok || sp.error) && <div><Flash ok={sp.ok} error={sp.error} /></div>}
         {empty && <p className="card p-8 text-center text-sm text-ink-soft">現在募集中のプロジェクトはありません。</p>}
         {spotlight && <Spotlight p={spotlight} />}
-        {SECTIONS.map((s, i) =>
-          data[i].length ? (
+        {sections.map((s) =>
+          s.items.length ? (
             <section key={s.key}>
               <div className="mb-4 flex items-end justify-between">
                 <div>
-                  <p className="eyebrow flex items-center gap-1.5">
-                    <LockIcon open={s.key === "unlocked"} className="h-3.5 w-3.5" />{s.sub}
-                  </p>
+                  <p className="eyebrow flex items-center gap-1.5"><LockIcon open={false} className="h-3.5 w-3.5" />{s.sub}</p>
                   <h2 className="mt-1 text-xl font-bold sm:text-2xl">{s.title}</h2>
                 </div>
-                <Link href="/projects" className="text-xs font-bold text-ink-soft">すべて見る →</Link>
+                {s.more && <Link href="/projects" className="text-xs font-bold text-ink-soft">一覧で見る →</Link>}
               </div>
-              <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-4">
-                {data[i].map((p) => <ProjectCard key={p.id} p={p} />)}
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {s.items.map((p) => <ProjectCard key={p.id} p={p} />)}
               </div>
             </section>
           ) : null,
@@ -115,8 +108,8 @@ function Spotlight({ p }: { p: ProjectCardData }) {
   const achieved = p.targets.filter((t) => t <= total).length;
   return (
     <section>
-      <p className="eyebrow flex items-center gap-1.5"><LockIcon open={false} className="h-3.5 w-3.5" />Spotlight</p>
-      <h2 className="mb-4 mt-1 text-xl font-bold sm:text-2xl">いま注目のプロジェクト</h2>
+      <p className="eyebrow flex items-center gap-1.5"><LockIcon open={false} className="h-3.5 w-3.5" />Featured</p>
+      <h2 className="mb-4 mt-1 text-xl font-bold sm:text-2xl">注目のプロジェクト</h2>
       {/* 画像と情報を1枚のカードにまとめる */}
       <div className="card grid overflow-hidden md:grid-cols-[1.05fr_1fr]">
         <Link href={`/projects/${p.slug}`} className="relative block overflow-hidden bg-mist">
@@ -130,10 +123,12 @@ function Spotlight({ p }: { p: ProjectCardData }) {
           </h3>
           <p className="mt-3 font-latin text-3xl font-semibold tabular-nums">{yen(p.price)}<span className="ml-1 font-sans text-sm font-medium text-ink-soft">税込</span></p>
           <div className="my-5 border-t border-line" />
-          <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} open={open} endsAt={p.ends_at} />
-          <Link href={`/projects/${p.slug}`} className="btn-cta mt-5 w-full py-4 text-base md:mt-auto">
-            <LockIcon open className="h-5 w-5" /> 詳しく見て申し込む
-          </Link>
+          <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} images={p.unlock_images} open={open} endsAt={p.ends_at} />
+          {open && (
+            <Link href={`/projects/${p.slug}/apply`} className="btn-cta mt-5 w-full py-4 text-base md:mt-auto">
+              <LockIcon open className="h-5 w-5" /> このプロジェクトに申し込む
+            </Link>
+          )}
         </div>
       </div>
     </section>
