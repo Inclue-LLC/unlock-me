@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
-import { HeroLock, LockIcon } from "@/components/LockIcon";
+import { HeroLock, LockIcon, ProductizedBadge } from "@/components/LockIcon";
 import { listSection, type Section } from "@/lib/projects";
 import { Flash } from "@/components/Flash";
 import { ProjectImage } from "@/components/ProjectImage";
@@ -112,13 +112,15 @@ function Spotlight({ p }: { p: ProjectCardData }) {
   const final = p.final_qty !== null;
   const total = final ? p.final_qty! : p.total_qty;
   const open = p.status === "open";
+  const achieved = p.targets.filter((t) => t <= total).length;
   return (
     <section>
       <p className="eyebrow flex items-center gap-1.5"><LockIcon open={false} className="h-3.5 w-3.5" />Spotlight</p>
       <h2 className="mb-4 mt-1 text-xl font-bold sm:text-2xl">いま注目のプロジェクト</h2>
       <div className="grid gap-5 md:grid-cols-[1.1fr_1fr] md:gap-8">
-        <Link href={`/projects/${p.slug}`} className="card block self-start overflow-hidden">
+        <Link href={`/projects/${p.slug}`} className="card relative block self-start overflow-hidden">
           <ProjectImage src={p.main_image} alt={p.title} className="aspect-square w-full object-cover transition duration-500 hover:scale-105" />
+          {(achieved > 0 || p.status === "succeeded") && <span className="absolute left-4 top-4"><ProductizedBadge size="lg" /></span>}
         </Link>
         <div className="space-y-5">
           <div>

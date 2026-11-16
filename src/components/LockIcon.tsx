@@ -72,3 +72,18 @@ export function Logo({ className = "", tagline = false }: { className?: string; 
     </span>
   );
 }
+
+/** 画像に重ねる「商品化成立」マーク（1つでもUNLOCKしたプロジェクト） */
+export function ProductizedBadge({ size = "sm" }: { size?: "sm" | "lg" }) {
+  const lg = size === "lg";
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full bg-pink-700 font-bold text-white shadow-[0_4px_14px_rgba(178,79,120,0.35)] ring-2 ring-white ${
+        lg ? "px-4 py-2 text-sm" : "px-2.5 py-1 text-[11px]"
+      }`}
+    >
+      <LockIcon open className={lg ? "h-4.5 w-4.5" : "h-3.5 w-3.5"} />
+      商品化成立
+    </span>
+  );
+}

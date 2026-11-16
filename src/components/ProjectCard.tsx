@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ProjectCardData } from "@/lib/projects";
 import { progressOf } from "@/lib/unlock";
 import { num, remainingLabel, yen } from "@/lib/util";
-import { LockIcon } from "./LockIcon";
+import { LockIcon, ProductizedBadge } from "./LockIcon";
 import { ProgressBar } from "./ProgressBar";
 import { ProjectImage } from "./ProjectImage";
 import { NextUnlockPanel } from "./ProjectProgress";
@@ -19,9 +19,13 @@ export function ProjectCard({ p }: { p: ProjectCardData }) {
     <Link href={`/projects/${p.slug}`} className="card group flex flex-col overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lg">
       <div className="relative aspect-square overflow-hidden bg-mist">
         <ProjectImage src={p.main_image} alt={p.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        {/* 1つでもUNLOCKしたら「商品化成立」マーク */}
+        {(prog.achievedCount > 0 || p.status === "succeeded") && (
+          <span className="absolute left-2 top-2"><ProductizedBadge /></span>
+        )}
         {!open && (
           <span className="chip absolute right-2 top-2 bg-white/90 text-ink-soft shadow-sm">
-            {p.status === "succeeded" ? "商品化成立" : p.status === "failed" ? "不成立" : "募集終了"}
+            {p.status === "failed" ? "不成立" : "募集終了"}
           </span>
         )}
       </div>
