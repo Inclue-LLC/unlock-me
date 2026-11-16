@@ -51,7 +51,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
       <Link href="/mypage" className="text-xs text-ink-soft">← 申込・注文一覧</Link>
       {sp.applied && (
         <div className="card overflow-hidden">
-          <div className="bg-gradient-to-br from-[#EAEAEA] to-pink p-6 text-center">
+          <div className="bg-gradient-to-br from-lavender to-pink p-6 text-center">
             <LockIcon open className="mx-auto h-10 w-10 text-pink-700" />
             <p className="mt-2 text-lg font-black">申込が完了しました！</p>
             <p className="text-xs text-ink-soft">確認メールをお送りしました。シェアしてUNLOCKを近づけよう</p>
@@ -66,7 +66,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
 
       <div className="card p-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="chip bg-violet text-white">{ORDER_STATUS_LABEL[status]}</span>
+          <span className="chip bg-ink text-white">{ORDER_STATUS_LABEL[status]}</span>
           {o.fulfillment_status !== "none" && <span className="chip bg-cream">{FULFILLMENT_LABEL[o.fulfillment_status]}</span>}
           <span className="text-xs text-ink-soft">申込番号 {o.number}</span>
         </div>
@@ -94,7 +94,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
             const open = o.final_qty !== null ? u.confirmed === true : u.achieved_at !== null;
             return (
               <li key={u.id} className="flex items-center gap-2">
-                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-600" : "text-[#D6D6D6]"}`} />
+                <LockIcon open={open} className={`h-4 w-4 ${open ? "text-pink-600" : "text-line"}`} />
                 <span className="text-xs text-ink-soft">{String(i + 1).padStart(2, "0")} / {num(u.target_qty)}個</span>
                 <span className={open ? "font-bold" : "text-ink-soft"}>{u.title}</span>
               </li>
@@ -132,7 +132,7 @@ export default async function OrderPage({ params, searchParams }: { params: Prom
           <input type="hidden" name="id" value={o.id} />
           <PmSelect pms={pms} selected={Number(o.payment_method_id)} />
           <div className="flex flex-wrap gap-2">
-            <SubmitButton className="btn-pink" pendingText="決済中…">{yen(o.amount)} を決済する</SubmitButton>
+            <SubmitButton className="btn-cta" pendingText="決済中…">{yen(o.amount)} を決済する</SubmitButton>
             <Link href={`/mypage/payment-methods?next=/mypage/orders/${o.id}`} className="btn-outline">カードを追加</Link>
           </div>
         </form>

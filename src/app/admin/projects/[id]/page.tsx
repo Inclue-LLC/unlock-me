@@ -73,7 +73,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
         </div>
         <ProgressBar total={total} targets={unlocks.map((u) => u.target_qty)} />
         <div className="flex flex-wrap gap-2">
-          {p.status === "draft" && state("publish", "公開する", "btn-pink btn-sm", "公開しますか？開始日時前の場合は「公開予定」になります。")}
+          {p.status === "draft" && state("publish", "公開する", "btn-cta btn-sm", "公開しますか？開始日時前の場合は「公開予定」になります。")}
           {["scheduled", "open", "suspended"].includes(p.status) && Number(stats.active) === 0 && state("unpublish", "下書きに戻す")}
           {["scheduled", "open"].includes(p.status) && state("suspend", "停止する", "btn-danger btn-sm", "申込受付を停止しますか？", true)}
           {p.status === "suspended" && state("resume", "再開する", "btn-soft btn-sm")}
@@ -98,7 +98,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           <details key={u.id} className="rounded-2xl border border-line p-4">
             <summary className="flex cursor-pointer flex-wrap items-center gap-2 text-sm">
               <b>UNLOCK {String(i + 1).padStart(2, "0")}</b><span>{num(u.target_qty)}個</span><span>{u.title}</span>
-              <span className={`chip ${u.achieved_at ? "bg-pink-600 text-white" : "bg-[#F2F2F2] text-ink-soft"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
+              <span className={`chip ${u.achieved_at ? "bg-pink-600 text-white" : "bg-mist text-ink-soft"}`}>{u.achieved_at ? "UNLOCKED" : "LOCKED"}</span>
               {u.confirmed !== null && <span className="chip bg-cream">{u.confirmed ? "確定" : "未達確定"}</span>}
               <span className="text-[11px] text-ink-soft">{u.kind === "productization" ? "商品化" : "特典"}</span>
             </summary>
@@ -119,7 +119,7 @@ export default async function EditProject({ params, searchParams }: { params: Pr
           </details>
         ))}
         {!locked && (
-          <form action={saveUnlockAction} className="grid gap-3 rounded-2xl bg-[#F7F7F7] p-4 md:grid-cols-[8rem_1fr]">
+          <form action={saveUnlockAction} className="grid gap-3 rounded-2xl bg-mist p-4 md:grid-cols-[8rem_1fr]">
             <p className="text-sm font-bold md:col-span-2">＋ UNLOCK条件を追加</p>
             <input type="hidden" name="id" value={p.id} />
             <UnlockFields published={published} />

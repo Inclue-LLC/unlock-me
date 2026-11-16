@@ -2,25 +2,26 @@ import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { Logo } from "./LockIcon";
 
+/** POP BASE の .site-header と同じ構成：マーク＋英字ロゴ＋説明、右に丸いナビ */
 export async function Header() {
   const user = await getCurrentUser();
+  const nav = "rounded-full px-3.5 py-1.5 text-sm font-bold text-ink-soft hover:bg-mist hover:text-ink";
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-white/85 backdrop-blur">
-      <div className="container-app flex h-14 items-center justify-between">
-        <Link href="/" aria-label="UNLOCK ME トップ">
-          <Logo className="text-base" />
+    <header className="sticky top-0 z-30 border-b border-line bg-paper/85 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 sm:px-6">
+        <Link href="/" aria-label="UNLOCK ME トップ" className="flex items-center">
+          <Logo tagline />
         </Link>
-        <nav className="flex items-center gap-2 text-xs font-bold">
-          <Link href="/projects" className="hidden rounded-full px-3 py-2 hover:bg-[#F2F2F2] sm:inline">プロジェクト一覧</Link>
-          {user?.role === "admin" && (
-            <Link href="/admin" className="rounded-full px-3 py-2 text-ink-soft hover:bg-[#F2F2F2]">管理</Link>
-          )}
+        <nav className="ml-auto flex items-center gap-1">
+          <Link href="/projects" className={`hidden sm:inline ${nav}`}>プロジェクト</Link>
+          <Link href="/guide" className={`hidden sm:inline ${nav}`}>ご利用ガイド</Link>
+          {user?.role === "admin" && <Link href="/admin" className={nav}>管理</Link>}
           {user ? (
-            <Link href="/mypage" className="btn-soft btn-sm">マイページ</Link>
+            <Link href="/mypage" className="btn-primary btn-sm ml-1">マイページ</Link>
           ) : (
             <>
-              <Link href="/login" className="rounded-full px-3 py-2 hover:bg-[#F2F2F2]">ログイン</Link>
-              <Link href="/signup" className="btn-primary btn-sm">会員登録</Link>
+              <Link href="/login" className={nav}>ログイン</Link>
+              <Link href="/signup" className="btn-primary btn-sm ml-1">会員登録</Link>
             </>
           )}
         </nav>

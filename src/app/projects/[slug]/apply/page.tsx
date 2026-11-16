@@ -94,7 +94,7 @@ export default async function ApplyPage({ params, searchParams }: { params: Prom
               )}
             </section>
 
-            <button type="submit" className="btn-pink w-full py-4" disabled={addresses.length === 0 || pms.length === 0}>申込内容を確認する</button>
+            <button type="submit" className="btn-cta w-full py-4" disabled={addresses.length === 0 || pms.length === 0}>申込内容を確認する</button>
           </form>
 
           {addresses.length === 0 && (

@@ -13,10 +13,10 @@ export function ProgressBar({ total, targets, compact = false }: { total: number
 
   if (compact) {
     return (
-      <div className="relative h-2 w-full rounded-full bg-[#F2F2F2]" role="progressbar" aria-valuemin={0} aria-valuemax={max} aria-valuenow={total}>
+      <div className="relative h-2 w-full rounded-full bg-mist" role="progressbar" aria-valuemin={0} aria-valuemax={max} aria-valuenow={total}>
         <div className="absolute inset-y-0 left-0 rounded-full bg-pink-600" style={{ width: `${pct}%` }} />
         {sorted.map((t) => (
-          <span key={t} className={`absolute top-1/2 h-3 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full ${t <= total ? "bg-pink-600" : "bg-[#9A9A9A]"}`} style={{ left: pos(t) }} />
+          <span key={t} className={`absolute top-1/2 h-3 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full ${t <= total ? "bg-pink-600" : "bg-ink-soft"}`} style={{ left: pos(t) }} />
         ))}
       </div>
     );
@@ -24,8 +24,8 @@ export function ProgressBar({ total, targets, compact = false }: { total: number
 
   return (
     <div className="px-4 pb-6 pt-1" role="progressbar" aria-valuemin={0} aria-valuemax={max} aria-valuenow={total}>
-      <div className="relative h-3 w-full rounded-full bg-[#F2F2F2]">
-        <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-pink-300 to-pink-600 transition-[width] duration-700" style={{ width: `${pct}%` }} />
+      <div className="relative h-3 w-full rounded-full bg-mist">
+        <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#C0AFF4] via-[#E7B6E8] to-pink-600 transition-[width] duration-700" style={{ width: `${pct}%` }} />
         {sorted.map((t, i) => {
           const open = t <= total;
           return (

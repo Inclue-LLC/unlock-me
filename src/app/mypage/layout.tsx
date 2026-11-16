@@ -25,7 +25,7 @@ export default async function MyLayout({ children }: { children: React.ReactNode
       </div>
       <nav className="-mx-4 mb-6 flex gap-2 overflow-x-auto px-4 pb-1 text-xs font-bold">
         {NAV.map(([href, label]) => (
-          <Link key={href} href={href} className="shrink-0 rounded-full border border-line bg-white px-4 py-2 hover:bg-[#F7F7F7]">{label}</Link>
+          <Link key={href} href={href} className="shrink-0 rounded-full border border-line bg-white px-4 py-2 hover:bg-mist">{label}</Link>
         ))}
       </nav>
       {children}

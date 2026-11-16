@@ -72,7 +72,7 @@ export default async function ConfirmPage({ params, searchParams }: { params: Pr
 
           <div className="flex flex-col-reverse gap-3 sm:flex-row">
             <Link href={back} className="btn-outline flex-1">修正する</Link>
-            <SubmitButton className="btn-pink flex-[2] py-4" pendingText="申込中…">この内容で申し込む</SubmitButton>
+            <SubmitButton className="btn-cta flex-[2] py-4" pendingText="申込中…">この内容で申し込む</SubmitButton>
           </div>
         </form>
       )}

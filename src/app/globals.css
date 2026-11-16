@@ -1,29 +1,31 @@
 @import "tailwindcss";
 
 /* POP BASE ブランドガイド準拠（近似値。正式値がある場合は差し替え） */
+/* POP BASE デザインシステム準拠（Inclue-LLC/popbase の css/style.css の値） */
 @theme {
+  /* ブランドカラー */
   --color-lavender: #DCCEF5;
-  --color-lavender-50: #F6F1FD;
-  --color-lavender-100: #EDE5FA;
-  --color-lavender-300: #C5B2EE;
-  --color-lavender-500: #9C83D6;
-  --color-lavender-700: #5B4796;
+  --color-lavender-50: #F8F2FB;   /* POP BASE --surface-2 */
   --color-pink: #F7C9D8;
   --color-pink-50: #FDF2F6;
   --color-pink-300: #F1A9C1;
-  --color-pink-500: #E57FA2;
-  --color-pink-600: #C9407A; /* 操作色（白文字コントラスト 4.67） */
-  --color-pink-700: #A82E62;
-  --color-cream: #F7F7F7;
-  --color-ink: #1A1A1A;      /* 本文：黒 */
-  --color-ink-2: #333333;
-  --color-ink-soft: #666666; /* 補足：グレー（白背景 5.74） */
-  --color-violet: #1A1A1A;   /* 基本ボタン：黒地に白文字 */
-  --color-violet-700: #333333;
-  --color-paper: #FFFFFF;
-  --color-line: #E8E8E8;
-  --font-sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
-  --radius-card: 1.25rem;
+  --color-pink-600: #D9729A;      /* POP BASE --pink（塗り・バッジ・アイコン） */
+  --color-pink-700: #B24F78;      /* ピンクの文字（白背景 4.9） */
+  --color-cream: #FFF4F1;
+  /* 基本色 */
+  --color-paper: #FFFAF8;         /* POP BASE --bg */
+  --color-mist: #F8F2FB;          /* POP BASE --surface-2 */
+  --color-ink: #2E2729;           /* POP BASE --ink / --primary */
+  --color-ink-2: #4A4245;
+  --color-ink-soft: #75696E;      /* POP BASE --ink-soft */
+  --color-line: #EFE4EA;          /* POP BASE --line */
+  --color-accent: #7A5FC4;        /* POP BASE --accent #9B80E0 を文字用に少し濃く */
+  --color-accent-soft: #9B80E0;   /* POP BASE --accent */
+  --color-new: #FFD76A;           /* POP BASE .badge-new */
+  --color-new-ink: #5A4300;
+  --font-sans: var(--font-zen), system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-latin: var(--font-poppins), var(--font-zen), sans-serif;
+  --radius-card: 20px;            /* POP BASE --radius */
 }
 
 @layer base {
@@ -32,48 +34,56 @@
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    letter-spacing: 0.02em;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; }
-  h1, h2, h3 { letter-spacing: 0.04em; }
+  h1, h2, h3, h4 { line-height: 1.35; }
+  :focus-visible { outline: 3px solid var(--color-accent-soft); outline-offset: 2px; }
 }
 
 @utility container-app { @apply mx-auto w-full max-w-5xl px-4; }
-@utility card { @apply rounded-[var(--radius-card)] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)] border border-line; }
+@utility card { @apply rounded-[var(--radius-card)] bg-white shadow-[0_6px_24px_rgba(120,90,140,0.08)]; }
 @utility btn {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-bold transition
-      disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-bold tracking-[0.04em]
+      transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-45 cursor-pointer;
   }
-@utility btn-primary { @apply btn bg-violet text-white hover:bg-violet-700; }
-@utility btn-pink { @apply btn bg-pink-600 text-white shadow-[0_6px_20px_-6px_rgba(201,64,122,0.6)] hover:bg-pink-700; }
-@utility btn-soft { @apply btn bg-[#F2F2F2] text-ink hover:bg-[#E8E8E8]; }
-@utility btn-outline { @apply btn border border-line bg-white text-ink hover:bg-[#F7F7F7]; }
+/* POP BASE .btn-primary：濃色のピル＋ラベンダーの影 */
+@utility btn-primary { @apply btn bg-ink text-white shadow-[0_8px_22px_rgba(150,110,190,0.28)] hover:bg-ink-2; }
+@utility btn-cta { @apply btn bg-ink text-white shadow-[0_8px_22px_rgba(150,110,190,0.28)] hover:bg-ink-2; }
+@utility btn-soft { @apply btn bg-mist text-ink hover:bg-lavender; }
+@utility btn-outline { @apply btn border border-line bg-white text-ink hover:bg-mist; }
 @utility btn-danger { @apply btn border border-pink-300 bg-white text-pink-700 hover:bg-pink-50; }
 @utility btn-sm { @apply px-4 py-2 text-xs; }
 @utility label { @apply mb-1 block text-xs font-bold text-ink-soft; }
 @utility input {
-    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition
-      focus:border-ink focus:ring-4 focus:ring-black/5;
+    @apply w-full rounded-xl border-[1.5px] border-line bg-white px-4 py-3 text-base text-ink outline-none transition
+      focus:border-transparent focus:outline-2 focus:outline-accent-soft;
   }
 @utility chip { @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-bold; }
+/* POP BASE .badge-new */
+@utility badge-new { @apply bg-new text-new-ink; }
+/* POP BASE .eyebrow（見出しの上の英字） */
+@utility eyebrow { @apply font-latin text-[0.78rem] font-semibold tracking-[0.25em] text-accent uppercase; }
 @utility section-title { @apply mb-4 flex items-center gap-2 text-lg font-bold; }
 @utility table { @apply w-full text-sm; }
 @utility notice { @apply rounded-2xl border px-4 py-3 text-sm; }
-@utility notice-info { @apply notice border-[#E0E0E0] bg-[#F7F7F7] text-ink; }
+@utility notice-info { @apply notice border-line bg-mist text-ink; }
 @utility notice-ok { @apply notice border-[#BFE5CF] bg-[#F0FAF4] text-[#2F7A51]; }
 @utility notice-error { @apply notice border-pink-300 bg-pink-50 text-pink-700; }
-/* LOCKED：ライトグレー＋斜めストライプ */
+/* LOCKED：POP BASE の扉のような淡色＋ストライプ */
 @utility vault {
-  background-color: #F1F1F3;
-  background-image:
-    repeating-linear-gradient(135deg, rgba(255,255,255,0.75) 0 10px, transparent 10px 20px); /* 錠のストライプ（模様） */
+  background-color: var(--color-mist);
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.8) 0 10px, transparent 10px 20px);
   color: var(--color-ink);
 }
-/* UNLOCKED：明るく光る */
+/* UNLOCKED：ピンクの縁で明るく */
 @utility unlocked-glow {
   background: #FFFFFF;
-  box-shadow: 0 0 0 2px var(--color-pink-300), 0 10px 30px -10px rgba(201,64,122,0.45);
+  box-shadow: 0 0 0 2px var(--color-pink), 0 10px 28px -10px rgba(217,114,154,0.5);
 }
+/* POP BASE のロゴの2色（ラベンダー→ピンク）。要所だけで使う */
+@utility brand-grad { background: linear-gradient(135deg, #DCCEF5 0%, #EFCBE6 45%, #F7C9D8 75%, #FFF4F1 100%); }
 
 @layer components {
   .table th { @apply whitespace-nowrap border-b border-line px-3 py-2 text-left text-xs font-bold text-ink-soft; }

@@ -76,8 +76,8 @@ export default async function ProjectPage({ params }: Props) {
         <div className="space-y-5">
           <div>
             <div className="mb-2 flex flex-wrap gap-2">
-              {p.category && <span className="chip bg-[#F2F2F2] text-ink-soft">{p.category}</span>}
-              <span className={`chip ${isOpen ? "bg-violet text-white" : "bg-white text-ink-soft border border-line"}`}>{PROJECT_STATUS_LABEL[p.status]}</span>
+              {p.category && <span className="chip bg-mist text-ink-soft">{p.category}</span>}
+              <span className={`chip ${isOpen ? "bg-ink text-white" : "bg-white text-ink-soft border border-line"}`}>{PROJECT_STATUS_LABEL[p.status]}</span>
             </div>
             <h1 className="text-xl font-black leading-snug sm:text-2xl">{p.title}</h1>
             {p.seller_name && <p className="mt-1 text-xs text-ink-soft">by {p.seller_name}</p>}
@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: Props) {
             {p.status === "open" && (
               prog.next ? (
                 <div className="vault relative overflow-hidden rounded-2xl p-4">
-                  <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT UNLOCK</span>
+                  <span className="absolute right-0 top-0 rounded-bl-xl badge-new px-3 py-1 font-latin text-[10px] font-semibold tracking-widest">NEXT UNLOCK</span>
                   <div className="flex items-center gap-3">
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-ink-soft ring-1 ring-white">
                       <LockIcon open={false} className="h-7 w-7" />
@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: Props) {
               user && mine >= p.max_per_user ? (
                 <p className="notice-info">お一人様の上限（{p.max_per_user}個）まで申込済みです。</p>
               ) : (
-                <Link href={`/projects/${p.slug}/apply`} className="btn-pink w-full py-4 text-base">
+                <Link href={`/projects/${p.slug}/apply`} className="btn-cta w-full py-4 text-base">
                   <LockIcon open className="h-5 w-5" /> 購入を申し込んでUNLOCKに参加
                 </Link>
               )
@@ -177,7 +177,7 @@ export default async function ProjectPage({ params }: Props) {
         </section>
         <section>
           <h2 className="section-title">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-white"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-pink-50 text-pink-700"><LockIcon open={prog.achievedCount > 0} className="h-4.5 w-4.5" /></span>
             UNLOCK条件<span className="text-sm font-bold text-pink-700">{prog.achievedCount}/{prog.count} 解放</span>
           </h2>
           {unlocks.length === 0 ? (

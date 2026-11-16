@@ -12,40 +12,63 @@ export function LockIcon({ open, className = "h-5 w-5" }: { open: boolean; class
   );
 }
 
-/** トップのヒーロー用：大きな南京錠が開く演出 */
+/**
+ * UNLOCK ME のマーク。POP BASE のマーク（images/popbase-mark.svg）と同じ配色：
+ * 掛け金＝奥の面のラベンダー、本体＝手前の面のピンク、鍵穴＝扉のクリーム。
+ */
+export function BrandMark({ className = "h-8 w-8", open = true }: { className?: string; open?: boolean }) {
+  return (
+    <svg viewBox="0 0 64 64" className={`${className} ${open ? "is-open" : ""}`} aria-hidden="true">
+      <defs>
+        <linearGradient id="um-back" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#C0AFF4" /><stop offset=".45" stopColor="#D6BBF4" /><stop offset="1" stopColor="#F0C2EE" />
+        </linearGradient>
+        <linearGradient id="um-front" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#FAB4D2" /><stop offset=".55" stopColor="#F7A5C0" /><stop offset="1" stopColor="#FCD2DA" />
+        </linearGradient>
+      </defs>
+      <path className="shackle" d="M20 30V20a12 12 0 0 1 24 0v10" fill="none" stroke="url(#um-back)" strokeWidth="7" strokeLinecap="round" />
+      <rect x="9" y="27" width="46" height="33" rx="10" fill="url(#um-front)" />
+      <path d="M32 36a5 5 0 0 0-2.6 9.3L28 52h8l-1.4-6.7A5 5 0 0 0 32 36z" fill="#FFF6F3" />
+    </svg>
+  );
+}
+
+/** トップのヒーロー用：POP BASE のマークの配色の南京錠が開く演出 */
 export function HeroLock({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 200 220" className={className} aria-hidden="true">
       <defs>
-        <linearGradient id="hl-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#F7C9D8" />
-          <stop offset="1" stopColor="#C9407A" />
+        <linearGradient id="hl-body" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#FAB4D2" /><stop offset=".55" stopColor="#F7A5C0" /><stop offset="1" stopColor="#FCD2DA" />
         </linearGradient>
-        <linearGradient id="hl-shackle" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#E5E5E5" />
-          <stop offset="1" stopColor="#A3A3A3" />
+        <linearGradient id="hl-shackle" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#C0AFF4" /><stop offset=".45" stopColor="#D6BBF4" /><stop offset="1" stopColor="#F0C2EE" />
         </linearGradient>
       </defs>
-      <circle className="hero-flash" cx="100" cy="120" r="90" fill="#F7C9D8" opacity="0" />
-      <path className="hero-shackle" d="M58 100V68a42 42 0 0 1 84 0v32" fill="none" stroke="url(#hl-shackle)" strokeWidth="18" strokeLinecap="round" />
-      <rect x="28" y="96" width="144" height="112" rx="30" fill="url(#hl-body)" />
-      <rect x="28" y="96" width="144" height="112" rx="30" fill="none" stroke="#FFFFFF" strokeOpacity=".5" strokeWidth="3" />
-      <path d="M100 128a14 14 0 0 0-7 26.1l-3.8 17.9h21.6l-3.8-17.9A14 14 0 0 0 100 128z" fill="#1A1A1A" />
-      <g fill="#FFFFFF">
-        <path d="M168 40l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" opacity=".9" />
-        <path d="M30 48l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" opacity=".7" />
+      <circle className="hero-flash" cx="100" cy="120" r="90" fill="#FFFFFF" opacity="0" />
+      <path className="hero-shackle" d="M58 100V68a42 42 0 0 1 84 0v32" fill="none" stroke="url(#hl-shackle)" strokeWidth="20" strokeLinecap="round" />
+      <rect x="28" y="96" width="144" height="112" rx="32" fill="url(#hl-body)" />
+      <path d="M100 128a14 14 0 0 0-7 26.1l-3.8 17.9h21.6l-3.8-17.9A14 14 0 0 0 100 128z" fill="#FFF6F3" />
+      <g fill="#FFD76A">
+        <path d="M168 40l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" />
+        <path d="M30 48l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z" opacity=".8" />
       </g>
     </svg>
   );
 }
 
-export function Logo({ className = "" }: { className?: string }) {
+/** ロゴ：マーク＋英字（Poppins）。tagline で POP BASE と同じく説明を添える */
+export function Logo({ className = "", tagline = false }: { className?: string; tagline?: boolean }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 font-black tracking-[0.12em] ${className}`}>
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-pink text-pink-700">
-        <LockIcon open className="h-4.5 w-4.5" />
-      </span>
-      UNLOCK<span className="text-pink-600">ME</span>
+    <span className={`inline-flex items-center gap-2 text-ink ${className}`}>
+      <BrandMark className="h-8 w-8" />
+      <span className="font-latin text-[1.1rem] font-semibold tracking-[0.04em] whitespace-nowrap">UNLOCK ME</span>
+      {tagline && (
+        <small className="hidden border-l border-line pl-3 text-[0.72rem] font-bold tracking-[0.08em] whitespace-nowrap text-ink-soft sm:inline">
+          参加型ECプラットフォーム
+        </small>
+      )}
     </span>
   );
 }

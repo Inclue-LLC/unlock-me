@@ -65,7 +65,7 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
                 </div>
                 {u.image && <img src={u.image} alt="" className={`h-16 w-16 shrink-0 rounded-xl object-cover ring-2 ring-white ${animate ? "animate-reveal" : ""}`} />}
               </div>
-              <span className="absolute right-3 top-3 rotate-6 rounded-md border-2 border-pink-600 px-1.5 text-[10px] font-black tracking-widest text-pink-600">
+              <span className="absolute right-3 top-3 rotate-6 rounded-md border-2 border-pink-600 px-1.5 font-latin text-[10px] font-semibold tracking-widest text-pink-700">
                 UNLOCKED
               </span>
             </li>
@@ -73,9 +73,9 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
         }
 
         return (
-          <li key={u.id} className={`vault relative overflow-hidden rounded-2xl p-4 ${isNext ? "ring-4 ring-pink-600/70" : "opacity-95"}`}>
+          <li key={u.id} className={`vault relative overflow-hidden rounded-2xl p-4 ${isNext ? "ring-4 ring-new" : "opacity-95"}`}>
             {isNext && (
-              <span className="absolute right-0 top-0 rounded-bl-xl bg-pink-600 px-3 py-1 text-[10px] font-black tracking-widest text-white">NEXT</span>
+              <span className="absolute right-0 top-0 rounded-bl-xl badge-new px-3 py-1 font-latin text-[10px] font-semibold tracking-widest">NEXT</span>
             )}
             <div className="flex items-center gap-4">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/70 text-ink-soft ring-1 ring-white">
@@ -89,7 +89,7 @@ export function UnlockList({ projectId, unlocks, total, final }: { projectId: nu
               {u.image && (
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-2 ring-white">
                   <img src={u.image} alt="" className="h-full w-full scale-110 object-cover blur-md" />
-                  <span className="absolute inset-0 flex items-center justify-center bg-[#EAEAEA]/60 text-ink-soft"><LockIcon open={false} className="h-6 w-6" /></span>
+                  <span className="absolute inset-0 flex items-center justify-center bg-mist/70 text-ink-soft"><LockIcon open={false} className="h-6 w-6" /></span>
                 </div>
               )}
             </div>

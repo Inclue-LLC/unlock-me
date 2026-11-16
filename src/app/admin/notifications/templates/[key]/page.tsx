@@ -19,7 +19,7 @@ export default async function TemplateEdit({ params, searchParams }: { params: P
     <div className="space-y-4">
       <PageTitle>{def.name}</PageTitle>
       <Flash ok={sp.ok} error={sp.error} />
-      <p className="text-xs text-ink-soft">使用できる変数：{vars.map((v) => <code key={v} className="mr-2 rounded bg-[#F7F7F7] px-1">{`{{${v}}}`}</code>)}</p>
+      <p className="text-xs text-ink-soft">使用できる変数：{vars.map((v) => <code key={v} className="mr-2 rounded bg-mist px-1">{`{{${v}}}`}</code>)}</p>
       <form action={saveTemplateAction} className="card space-y-3 p-5">
         <input type="hidden" name="key" value={key} />
         <div><label className="label">件名</label><input name="subject" defaultValue={row?.subject ?? def.subject} className="input" /></div>

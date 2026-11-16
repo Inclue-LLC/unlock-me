@@ -13,8 +13,8 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "マイページ" };
 
 const STATUS_STYLE: Partial<Record<OrderStatus, string>> = {
-  applied: "bg-[#F2F2F2] text-ink-soft",
-  awaiting_payment: "bg-[#F2F2F2] text-ink-soft",
+  applied: "bg-mist text-ink-soft",
+  awaiting_payment: "bg-mist text-ink-soft",
   payment_failed: "bg-pink-600 text-white",
   paid: "bg-[#E3F5EA] text-[#2F7A51]",
 };
@@ -48,7 +48,7 @@ export default async function MyPage({ searchParams }: { searchParams: Promise<R
       {orders.length === 0 && (
         <div className="card p-8 text-center text-sm">
           <p className="mb-4 text-ink-soft">まだ申込はありません。</p>
-          <Link href="/projects" className="btn-pink">プロジェクトを探す</Link>
+          <Link href="/projects" className="btn-cta">プロジェクトを探す</Link>
         </div>
       )}
       {groups.map(([label, list]) =>

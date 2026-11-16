@@ -15,7 +15,7 @@ export function ProjectCard({ p }: { p: ProjectCardData }) {
 
   return (
     <Link href={`/projects/${p.slug}`} className="card group flex flex-col overflow-hidden transition hover:-translate-y-0.5 hover:shadow-lg">
-      <div className="relative aspect-square overflow-hidden bg-[#F7F7F7]">
+      <div className="relative aspect-square overflow-hidden bg-mist">
         <ProjectImage src={p.main_image} alt={p.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         <span className={`chip absolute right-2 top-2 shadow-sm ${open ? "bg-white text-ink" : "bg-white/90 text-ink-soft"}`}>
           {open ? remainingLabel(p.ends_at) : p.status === "succeeded" ? "商品化成立" : p.status === "failed" ? "不成立" : "募集終了"}
@@ -24,7 +24,7 @@ export function ProjectCard({ p }: { p: ProjectCardData }) {
         {prog.count > 0 && (
           <div className="absolute bottom-2 left-2 flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 shadow-sm backdrop-blur">
             {p.targets.map((t) => (
-              <LockIcon key={t} open={t <= total} className={`h-4 w-4 ${t <= total ? "text-pink-600" : "text-[#9A9A9A]"}`} />
+              <LockIcon key={t} open={t <= total} className={`h-4 w-4 ${t <= total ? "text-pink-600" : "text-ink-soft/60"}`} />
             ))}
             <span className="ml-0.5 text-[10px] font-black text-ink">{prog.achievedCount}/{prog.count}</span>
           </div>
@@ -45,11 +45,11 @@ export function ProjectCard({ p }: { p: ProjectCardData }) {
       {open && prog.next ? (
         <div className="vault flex items-center gap-2 px-3 py-2.5 text-[11px] sm:px-4">
           <LockIcon open={false} className="h-4 w-4 shrink-0 text-ink-soft" />
-          <span className="truncate font-bold text-ink-soft">NEXT UNLOCK</span>
+          <span className="truncate font-latin font-semibold tracking-wider text-ink-soft">NEXT UNLOCK</span>
           <b className="ml-auto whitespace-nowrap text-sm tabular-nums text-pink-700">あと{num(prog.remaining)}個</b>
         </div>
       ) : allUnlocked || p.status === "succeeded" ? (
-        <div className="flex items-center gap-2 bg-pink-600 px-3 py-2.5 text-[11px] font-black text-white sm:px-4">
+        <div className="flex items-center gap-2 bg-pink-700 px-3 py-2.5 text-[11px] font-bold text-white sm:px-4">
           <LockIcon open className="h-4 w-4" />
           {allUnlocked ? "ALL UNLOCKED!" : "商品化 UNLOCKED"}
         </div>

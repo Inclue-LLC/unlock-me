@@ -24,7 +24,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
           <input type="checkbox" name="agree" required className="mt-0.5 accent-pink-600" />
           <span><Link href="/terms" className="underline" target="_blank">利用規約</Link>・<Link href="/privacy" className="underline" target="_blank">プライバシーポリシー</Link>に同意します</span>
         </label>
-        <SubmitButton className="btn-pink w-full">登録してメールを確認する</SubmitButton>
+        <SubmitButton className="btn-cta w-full">登録してメールを確認する</SubmitButton>
       </form>
       <p className="mt-6 text-center text-xs">登録済みの方は <Link href={`/login?next=${encodeURIComponent(next)}`} className="font-bold text-ink-soft underline">ログイン</Link></p>
     </AuthCard>
