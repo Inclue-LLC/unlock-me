@@ -123,7 +123,7 @@ function Spotlight({ p }: { p: ProjectCardData }) {
           </h3>
           <p className="mt-3 font-latin text-3xl font-semibold tabular-nums">{yen(p.price)}<span className="ml-1 font-sans text-sm font-medium text-ink-soft">税込</span></p>
           <div className="my-5 border-t border-line" />
-          <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} images={p.unlock_images} open={open} endsAt={p.ends_at} />
+          <ProjectProgress total={total} final={final} targets={p.targets} titles={p.unlock_titles} images={p.unlock_images} mainImage={p.main_image} open={open} endsAt={p.ends_at} />
           {open && (
             <Link href={`/projects/${p.slug}/apply`} className="btn-cta mt-5 w-full py-4 text-base md:mt-auto">
               <LockIcon open className="h-5 w-5" /> このプロジェクトに申し込む

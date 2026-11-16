@@ -5,7 +5,7 @@ import { num, remainingLabel, yen } from "@/lib/util";
 import { LockIcon, ProductizedBadge } from "./LockIcon";
 import { ProgressBar } from "./ProgressBar";
 import { ProjectImage } from "./ProjectImage";
-import { NextUnlockPanel } from "./ProjectProgress";
+import { NextUnlockPanel, nextUnlockImage } from "./ProjectProgress";
 
 /** 商品カード：商品ページと同じ並び（商品名 → 値段 → 申込数 → ロックトラック → 次のUNLOCK） */
 export function ProjectCard({ p }: { p: ProjectCardData }) {
@@ -49,7 +49,7 @@ export function ProjectCard({ p }: { p: ProjectCardData }) {
         <div className="mt-auto space-y-3 pt-3">
           {prog.count > 0 && <ProgressBar total={total} targets={p.targets} />}
           {open && prog.next ? (
-            <NextUnlockPanel size="sm" index={prog.achievedCount + 1} title={prog.next.title} remaining={prog.remaining} image={p.unlock_images[p.targets.indexOf(prog.next.target_qty)] || undefined} />
+            <NextUnlockPanel size="sm" index={prog.achievedCount + 1} title={prog.next.title} remaining={prog.remaining} image={nextUnlockImage(p.unlock_images[p.targets.indexOf(prog.next.target_qty)], p.targets.indexOf(prog.next.target_qty), p.main_image)} />
           ) : allUnlocked || p.status === "succeeded" ? (
             <div className="unlocked-glow flex items-center gap-1.5 rounded-xl px-3 py-2.5 text-xs font-bold text-pink-700">
               <LockIcon open className="h-4 w-4 shrink-0" />

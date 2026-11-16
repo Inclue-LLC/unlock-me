@@ -84,7 +84,7 @@ export default async function ProjectPage({ params }: Props) {
 
           <div className="card space-y-4 p-5">
             <ProjectProgress
-              total={total} final={final} targets={unlocks.map((u) => u.target_qty)} titles={unlocks.map((u) => u.title)} images={unlocks.map((u) => u.image)}
+              total={total} final={final} targets={unlocks.map((u) => u.target_qty)} titles={unlocks.map((u) => u.title)} images={unlocks.map((u) => u.image)} mainImage={p.main_image}
               open={p.status === "open"} endsAt={p.ends_at} participants={participants}
             />
             {p.status === "succeeded" && <p className="notice-ok">商品化が成立しました！（最終 {num(total)}個）</p>}

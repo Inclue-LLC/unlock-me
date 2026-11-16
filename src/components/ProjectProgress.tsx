@@ -15,6 +15,11 @@ export function unlockShortName(title: string): string | null {
   return m ? m[1] : null;
 }
 
+/** 次のUNLOCKの画像：特典画像。最初のUNLOCK（商品化）で未設定なら商品の画像 */
+export function nextUnlockImage(image: string | undefined, index: number, mainImage?: string) {
+  return image || (index === 0 ? mainImage : undefined) || undefined;
+}
+
 /** 「あと80個で 限定チャームをUNLOCK！」の見出し */
 function Headline({ index, title, remaining, lg }: { index: number; title: string; remaining: number; lg: boolean }) {
   const short = unlockShortName(title);
@@ -27,8 +32,6 @@ function Headline({ index, title, remaining, lg }: { index: number; title: strin
         <span className={`font-bold ${lg ? "text-base" : "text-sm"}`}>個で</span>
       </p>
       <p className={`mt-1.5 font-bold leading-snug ${lg ? "text-xl" : "text-lg"}`}>{goal}</p>
-      {/* 見出しを短くしたときは、正式な内容も全文で添える */}
-      {(index === 1 || short) && <p className="mt-1 text-xs text-ink-soft">{title}</p>}
     </div>
   );
 }
@@ -74,9 +77,9 @@ export function NextUnlockPanel({
  * 商品ページとトップページの注目プロジェクトで同じ見た目にするための共通部品。
  */
 export function ProjectProgress({
-  total, final, targets, titles, images = [], open, endsAt, participants,
+  total, final, targets, titles, images = [], mainImage, open, endsAt, participants,
 }: {
-  total: number; final: boolean; targets: number[]; titles: string[]; images?: string[]; open: boolean; endsAt: Date; participants?: number;
+  total: number; final: boolean; targets: number[]; titles: string[]; images?: string[]; mainImage?: string; open: boolean; endsAt: Date; participants?: number;
 }) {
   const prog = progressOf(targets.map((t, i) => ({ target_qty: t, title: titles[i] ?? "" })), total);
   const nextIdx = prog.next ? targets.indexOf(prog.next.target_qty) : -1;
@@ -94,7 +97,7 @@ export function ProjectProgress({
       </div>
       <ProgressBar total={total} targets={targets} />
       {open && (prog.next ? (
-        <NextUnlockPanel index={prog.achievedCount + 1} title={prog.next.title} remaining={prog.remaining} image={images[nextIdx] || undefined} />
+        <NextUnlockPanel index={prog.achievedCount + 1} title={prog.next.title} remaining={prog.remaining} image={nextUnlockImage(images[nextIdx], nextIdx, mainImage)} />
       ) : targets.length > 0 ? (
         <div className="unlocked-glow flex items-center gap-3 rounded-2xl p-4 font-bold text-pink-700">
           <LockIcon open className="h-7 w-7" /> すべてのUNLOCKを達成しました！
