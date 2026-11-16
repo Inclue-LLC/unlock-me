@@ -71,10 +71,10 @@
 @utility notice-info { @apply notice border-line bg-mist text-ink; }
 @utility notice-ok { @apply notice border-[#BFE5CF] bg-[#F0FAF4] text-[#2F7A51]; }
 @utility notice-error { @apply notice border-pink-300 bg-pink-50 text-pink-700; }
-/* LOCKED：POP BASE の扉のような淡色＋ストライプ */
+/* LOCKED：POP BASE の --surface-2 の無地（文字が読みやすいよう模様なし） */
 @utility vault {
   background-color: var(--color-mist);
-  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.8) 0 10px, transparent 10px 20px);
+  box-shadow: inset 0 0 0 1px var(--color-line);
   color: var(--color-ink);
 }
 /* UNLOCKED：ピンクの縁で明るく */

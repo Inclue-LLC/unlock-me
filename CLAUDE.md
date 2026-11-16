@@ -20,7 +20,7 @@ UNLOCK ME での反映先：`src/app/globals.css` の `@theme`（コメントに
 
 ## UNLOCK ME 独自の UI ルール（POP BASE の上に足しているもの）
 
-- LOCKED：淡色＋斜めストライプ（`vault`）、閉じた錠
+- LOCKED：淡色の無地（`vault`。文字が読みにくくなるので模様は入れない）、閉じた錠
 - UNLOCKED：ピンク（`unlocked-glow`・`pink-600`）、開いた錠
 - NEXT：POP BASE の NEW バッジと同じ黄色（`badge-new`）
 - 主ボタン：POP BASE の `.btn-primary`（濃色のピル）
