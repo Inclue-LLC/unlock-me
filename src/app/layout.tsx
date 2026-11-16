@@ -23,7 +23,8 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja" className={`${poppins.variable} ${zen.variable}`}>
-      <body className="min-h-screen">
+      {/* ブラウザ拡張（ColorZilla など）が body に属性を足すことによる開発時の警告を抑える。body 直下の属性だけが対象 */}
+      <body className="min-h-screen" suppressHydrationWarning>
         <Header />
         <main>{children}</main>
         <Footer />
