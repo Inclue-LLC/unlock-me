@@ -76,19 +76,18 @@ export default async function ProjectPage({ params }: Props) {
         <div className="space-y-5">
           <div>
             <div className="mb-2 flex flex-wrap gap-2">
-              {p.category && <span className="chip bg-mist text-ink-soft">{p.category}</span>}
               <span className={`chip ${isOpen ? "bg-ink text-white" : "bg-white text-ink-soft border border-line"}`}>{PROJECT_STATUS_LABEL[p.status]}</span>
             </div>
-            <h1 className="text-xl font-black leading-snug sm:text-2xl">{p.title}</h1>
+            <h1 className="text-2xl font-bold leading-snug sm:text-3xl">{p.title}</h1>
             {p.seller_name && <p className="mt-1 text-xs text-ink-soft">by {p.seller_name}</p>}
-            <p className="mt-3 text-2xl font-black">{yen(p.price)}<span className="ml-1 text-xs font-normal text-ink-soft">税込</span></p>
+            <p className="mt-3 font-latin text-3xl font-semibold tabular-nums">{yen(p.price)}<span className="ml-1 font-sans text-sm font-medium text-ink-soft">税込</span></p>
           </div>
 
           <div className="card space-y-4 p-5">
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-xs font-bold text-ink-soft">{final ? "最終申込数量" : "購入申込"}</p>
-                <p className="text-4xl font-black tabular-nums">{num(total)}<span className="ml-1 text-sm">個</span></p>
+                <p className="text-sm font-bold text-ink-soft">{final ? "最終申込数" : "申込数"}</p>
+                <p className="font-latin text-4xl font-semibold tabular-nums">{num(total)}<span className="ml-1 font-sans text-base font-bold">個</span></p>
               </div>
               <div className="text-right text-xs text-ink-soft">
                 <p>参加者 <b className="text-ink">{num(participants)}</b>人</p>

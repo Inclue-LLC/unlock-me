@@ -31,31 +31,44 @@ export function ProjectCard({ p }: { p: ProjectCardData }) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
-        {p.category && <p className="text-[11px] font-bold text-ink-soft">{p.category}</p>}
-        <h3 className="line-clamp-2 min-h-[2.6em] text-sm font-bold leading-snug">{p.title}</h3>
-        <p className="text-base font-black">{yen(p.price)}<span className="ml-1 text-[10px] font-normal text-ink-soft">税込</span></p>
-        <ProgressBar total={total} targets={p.targets} compact />
-        <p className="text-[11px] text-ink-soft">
-          <b className="text-base font-black text-ink tabular-nums">{num(total)}</b> 個{final ? "で終了" : "申込"}
+      <div className="flex flex-1 flex-col gap-2.5 p-3 sm:p-4">
+        {/* 商品名 */}
+        <h3 className="line-clamp-2 min-h-[2.7em] text-[15px] font-bold leading-snug sm:text-base">{p.title}</h3>
+        {/* 値段 */}
+        <p className="font-latin text-xl font-semibold tabular-nums leading-none sm:text-2xl">
+          {yen(p.price)}<span className="ml-1 font-sans text-[11px] font-medium text-ink-soft">税込</span>
         </p>
-      </div>
 
-      {/* 次のUNLOCK */}
-      {open && prog.next ? (
-        <div className="vault flex items-center gap-2 px-3 py-2.5 text-[11px] sm:px-4">
-          <LockIcon open={false} className="h-4 w-4 shrink-0 text-ink-soft" />
-          <span className="truncate font-latin font-semibold tracking-wider text-ink-soft">NEXT UNLOCK</span>
-          <b className="ml-auto whitespace-nowrap text-sm tabular-nums text-pink-700">あと{num(prog.remaining)}個</b>
+        <div className="mt-auto space-y-2 pt-1">
+          <ProgressBar total={total} targets={p.targets} compact />
+          {/* 申込数 */}
+          <div className="flex items-baseline justify-between gap-2 rounded-xl bg-mist px-3 py-2">
+            <span className="whitespace-nowrap text-[11px] font-bold text-ink-soft sm:text-xs">{final ? "最終申込数" : "申込数"}</span>
+            <span className="whitespace-nowrap leading-none">
+              <b className="font-latin text-lg font-semibold tabular-nums sm:text-xl">{num(total)}</b>
+              <span className="ml-0.5 text-xs font-bold">個</span>
+            </span>
+          </div>
+          {/* 次のUNLOCKまでの個数（終了・全達成時は状態） */}
+          {open && prog.next ? (
+            <div className="rounded-xl bg-pink-50 px-3 py-2 text-pink-700">
+              <p className="flex items-center gap-1 whitespace-nowrap text-[11px] font-bold sm:text-xs">
+                <LockIcon open={false} className="h-3.5 w-3.5 shrink-0" />次のUNLOCKまで
+              </p>
+              <p className="mt-1 whitespace-nowrap text-right leading-none">
+                <span className="text-xs font-bold">あと</span>
+                <b className="mx-0.5 font-latin text-2xl font-semibold tabular-nums">{num(prog.remaining)}</b>
+                <span className="text-xs font-bold">個</span>
+              </p>
+            </div>
+          ) : (
+            <div className={`flex items-center gap-1.5 rounded-xl px-3 py-2.5 text-xs font-bold ${allUnlocked || p.status === "succeeded" ? "bg-pink-700 text-white" : "bg-mist text-ink-soft"}`}>
+              {(allUnlocked || p.status === "succeeded") && <LockIcon open className="h-4 w-4 shrink-0" />}
+              {allUnlocked ? "すべてUNLOCKしました" : p.status === "succeeded" ? "商品化が決定しました" : p.status === "failed" ? "目標未達で終了" : "募集終了"}
+            </div>
+          )}
         </div>
-      ) : allUnlocked || p.status === "succeeded" ? (
-        <div className="flex items-center gap-2 bg-pink-700 px-3 py-2.5 text-[11px] font-bold text-white sm:px-4">
-          <LockIcon open className="h-4 w-4" />
-          {allUnlocked ? "ALL UNLOCKED!" : "商品化 UNLOCKED"}
-        </div>
-      ) : (
-        <div className="bg-ink/5 px-3 py-2.5 text-[11px] text-ink-soft sm:px-4">{p.status === "failed" ? "目標未達で終了" : " "}</div>
-      )}
+      </div>
     </Link>
   );
 }

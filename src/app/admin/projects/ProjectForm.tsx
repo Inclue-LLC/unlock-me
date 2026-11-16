@@ -8,7 +8,6 @@ export function ProjectFields({ p, sellers }: { p?: Project; sellers: { id: numb
     <div className="grid gap-4 md:grid-cols-2">
       <F label="商品名" className="md:col-span-2"><input name="title" required maxLength={120} defaultValue={p?.title} className="input" /></F>
       <F label="URL名（/projects/○○）"><input name="slug" required pattern="[a-z0-9][a-z0-9\-]{1,62}" defaultValue={p?.slug} className="input font-mono" /></F>
-      <F label="カテゴリー"><input name="category" maxLength={40} defaultValue={p?.category} className="input" placeholder="ぬいぐるみ / アクリル / アパレル など" /></F>
       <F label="出品者">
         <select name="seller_id" defaultValue={p?.seller_id ?? ""} className="input">
           <option value="">（運営）</option>
