@@ -15,21 +15,23 @@ export function NextUnlockPanel({ index, title, remaining, size = "lg" }: { inde
       <span className={`absolute right-0 top-0 badge-new font-latin font-semibold tracking-widest ${lg ? "rounded-bl-xl px-3 py-1 text-[10px]" : "rounded-bl-lg px-2 py-0.5 text-[9px]"}`}>
         NEXT{lg && " UNLOCK"}
       </span>
-      <div className={`flex items-center ${lg ? "gap-3" : "gap-2"}`}>
-        <span className={`flex shrink-0 items-center justify-center bg-white/70 text-ink-soft ring-1 ring-white ${lg ? "h-12 w-12 rounded-xl" : "h-8 w-8 rounded-lg"}`}>
+      <div className={`flex items-start ${lg ? "gap-3" : "gap-2"}`}>
+        <span className={`shrink-0 items-center justify-center bg-white/70 text-ink-soft ring-1 ring-white ${lg ? "flex h-12 w-12 rounded-xl" : "hidden h-8 w-8 rounded-lg sm:flex"}`}>
           <LockIcon open={false} className={lg ? "h-7 w-7" : "h-4.5 w-4.5"} />
         </span>
         <div className="min-w-0">
-          <p className={`font-latin font-semibold tracking-widest text-ink-soft ${lg ? "text-[11px]" : "text-[9px]"}`}>UNLOCK {String(index).padStart(2, "0")}</p>
-          <p className={`truncate font-bold ${lg ? "" : "text-xs"}`}>{title}</p>
+          <p className={`whitespace-nowrap font-latin font-semibold tracking-widest text-ink-soft ${lg ? "pr-24 text-[11px]" : "pr-10 text-[9px]"}`}>UNLOCK {String(index).padStart(2, "0")}</p>
+          <p className={`break-words font-bold leading-snug ${lg ? "" : "text-xs"}`}>{title}</p>
         </div>
       </div>
-      <p className={`text-right text-ink-soft ${lg ? "mt-3 text-sm" : "mt-1.5 text-[11px]"}`}>
-        {lg ? "解放まで " : ""}
+      <p className={`flex flex-wrap items-baseline justify-end gap-x-1 text-ink-soft ${lg ? "mt-3 text-sm" : "mt-1.5 text-[11px]"}`}>
+        <span className="whitespace-nowrap">UNLOCKまで</span>
+        <span className="whitespace-nowrap">
         <b className={`font-latin font-semibold tabular-nums text-pink-700 ${lg ? "text-3xl" : "text-2xl"}`}>
           <span className={`font-sans font-bold ${lg ? "text-lg" : "text-xs"}`}>あと</span>{num(remaining)}
         </b>
         <span className="font-bold text-ink">個</span>
+        </span>
       </p>
     </div>
   );
